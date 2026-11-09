@@ -8,6 +8,7 @@ import "./performance.css";
 import "./review-ui.css";
 import "./dark-mode.css";
 import "./role-overview.css";
+import "./review-workflow.css";
 
 export const metadata: Metadata = {
   title: "Torchlabs · KPI Evaluator",

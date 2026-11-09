@@ -16,8 +16,8 @@ Torchlabs performance workspace with a black-and-orange interface, departmental 
 | Role | KPI permissions |
 | --- | --- |
 | Individual Employee | Enter actuals and achievement evidence for their assigned employee scorecard. Cannot change targets or other employees' results. |
-| Functional Leader | Review assigned departments; enter departmental actuals and their own linked scorecard actuals. Cannot change targets. |
-| CEO | Configure KPI targets at all performance layers and organizational actuals; review all performance layers. |
+| Functional Leader | Review assigned departments, submit their own actuals and sign off team submissions. Team actual corrections require justification. Cannot change KPI setup or targets. |
+| CEO | Manage KPI setup and targets, all actuals, People & access, review windows and final approvals across all departments. |
 | General Admin | Manage all KPI configuration, results, employee profiles and application role assignments. |
 
 Role checks and data filtering are enforced by the server. Application role assignment does not grant access to the private hosted site; site invitations are separate.
@@ -86,3 +86,25 @@ The workspace uses a dark black and orange theme by default. Individual Employee
 Employees start on Organizational data, showing only directly linked organizational KPI targets, actuals and gaps, departmental G1–G6 achievement, their own percentage-point contribution and individual actuals. General Admin and CEO assign direct organizational KPI links in Configure. Broad goal mappings do not automatically expose organizational measures. Snapshots exclude company notes and evidence. Leaders see assigned functions; CEO and Admin review all departments.
 
 Only General Admin and CEO change KPI setup and targets. A Functional Leader may correct a submitted employee actual in their assigned department, subject to an immediate-manager assignment when present. Mandatory justification, original/new values, actor and timestamp remain visible to the employee. Supervisors cannot alter targets, employee evidence, review notes or recognized revenue in a correction. CEO can manage actuals at all layers.
+
+
+## Review workflow and onboarding
+
+Organizational Performance uses six goal bars. Company bars count measures meeting target, below target and pending; selecting a department changes to its weighted goal contribution. KPI setup is separate. Blank KPI rows are hidden from performance lists by default; management can include those awaiting setup. Repeated G1–G6 labels are grouped once above their KPI rows.
+
+Admin and CEO manage People & access, departments, employee profiles, supervisor designation, scorecard templates and accounts. New employee scorecards copy exact template definitions and weights, never actuals, targets, evidence or approvals. A basic employee sees Organizational Performance, My Department, My KPIs & Performance and help; submission and annual review actions sit within their own view.
+
+Management opens Mid-year and Year-end windows. Employee actuals and attachments can change only in an open cycle while the KPI is Draft or Returned. Saving is separate from submission. Submitted KPIs lock pending supervisor sign-off; Admin or CEO completes final sign-off. The signed identity, time, notes, frozen KPI definition, target, actual and file references are retained. Return requires a reason. Changing a submitted definition, actual, target or evidence clears prior approvals. Supervisors may correct submitted actuals only with a mandatory justification.
+
+Annual reviews use 50% finally approved Mid-year achievement and 50% finally approved Year-end achievement. Both must be present. Raw actuals are never added across units. The annual scorecard requires complete approved results, using each signed review’s scorecard weights. Evaluator notes appear last. Attributed-revenue entry has been removed from the result editor; historical records are retained.
+
+
+## Alerts, help and export scope
+
+Assigned supervisors and management can raise Amber or Red KPI alerts. Employees can request help from their supervisor or CEO. In-app recipients can acknowledge, respond and resolve requests; dashboards refresh every 15 seconds. A CEO account must exist for direct CEO routing. No email delivery is configured.
+
+Admin and CEO can filter departments and people and export overall data. Functional Leaders can export only records for their assigned departments; company-wide backups are denied. Basic employees have no export action or endpoint access, and their department is selected from their assigned profile.
+
+Run `pnpm test:workflow` for the role, window, sign-off, annual score, correction, onboarding, alert/help and export authorization checks.
+
+A later review-cycle definition update preserves an earlier final-approved snapshot. Changes to a submitted cycle clear approvals only for that selected cycle; management must select a pending cycle before editing its submitted definition.

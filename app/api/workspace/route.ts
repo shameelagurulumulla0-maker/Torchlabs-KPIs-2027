@@ -7,9 +7,10 @@ import {upgradeState,departments} from '../../frameworks';
 import {canSetTarget,canEnterActual,canOverrideActual,canEditMetric,visibleState,roles} from '../../permissions';
 import {validLevels,flagRecipients,canReviewFlag} from '../../performance';
 import type {LevelConfig,RiskFlag} from '../../model';
+import {management,isReviewPeriod,reviewOpen,supervisorCanSign,editableActual,invalidateReview} from '../../reviews';
 export const dynamic='force-dynamic';
 const reply=(data:unknown,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store'}});
-const validPeriod=(p:unknown)=>typeof p==='string'&&/^20\d\d-(Annual|Q[1-4]|M(0[1-9]|1[0-2]))$/.test(p);
+const validPeriod=(p:unknown)=>typeof p==='string'&&/^20\d\d-(MidYear|YearEnd|Annual|Q[1-4]|M(0[1-9]|1[0-2]))$/.test(p);
 async function read(user:ChatGPTUser){
  const db=getDb();let found=await db.select().from(dashboardState).where(eq(dashboardState.id,'organization')).get();
  const result=upgradeState(found?JSON.parse(found.content):initialState(),user);
@@ -35,11 +36,46 @@ export async function POST(request:Request){
  const body=JSON.parse(text),{state,revision,member,db}=await read(user);
  if(!member)return reply({error:'Your account has no assigned KPI role.'},403);
  if(body.revision!==revision)return reply({error:'Another change was saved. Reload the dashboard before saving again.'},409);
+ const knownDepartments=[...new Set([...departments,...(state.departments||[]),...(state.employees||[]).map(e=>e.department)])];
  const at=new Date().toISOString();let detail='',metricId:string|undefined;
- if(body.type==='entry'){
+ if(body.type==='review_window'){
+ if(!management(member)||!isReviewPeriod(body.period)||typeof body.open!=='boolean')return reply({error:'Only Admin and CEO can open or close a Mid-year or Year-end review window.'},403);
+ state.reviewWindows={...(state.reviewWindows||{}),[body.period]:{open:body.open,updatedAt:at,updatedBy:user.displayName}};detail=`${body.open?'Opened':'Closed'} KPI review window · ${body.period}`;
+ }else if(body.type==='review'){
+ const m=state.metrics.find(m=>m.id===body.metricId),period=body.period,key=`${body.metricId}:${period}`,record=state.reviews?.[key];
+ if(!m?.employeeId||!isReviewPeriod(period))return reply({error:'Select an employee KPI and Mid-year or Year-end review.'},400);
+ const note=typeof body.note==='string'?body.note.trim():'';if(note.length>2000)return reply({error:'Keep review notes within 2,000 characters.'},400);
+ if(body.action==='submit'){
+ if(m.employeeId!==member.employeeId||!reviewOpen(state,period))return reply({error:'Only the assigned employee can submit while management has opened this review window.'},403);
+ if(record&&!['Draft','Returned'].includes(record.status))return reply({error:'This KPI has already been submitted. Request a return before changing it.'},409);
+ const e=state.entries[key];if(!e||e.actual===null||e.target===null||m.direction==='range'&&e.upper===null)return reply({error:'An actual and approved target are required before submission.'},400);
+ const files=(state.files||[]).filter(f=>f.metricId===m.id&&f.period===period);
+ if(!files.length&&!e.evidence&&!e.evidenceLinks?.length&&!e.evidenceNotes?.trim())return reply({error:'Add achievement evidence before submitting for supervisor approval.'},400);
+ state.reviews={...(state.reviews||{}),[key]:{metricId:m.id,employeeId:m.employeeId,period,status:'Submitted',snapshot:JSON.parse(JSON.stringify(e)),metricSnapshot:JSON.parse(JSON.stringify(m)),evidenceFileIds:files.map(f=>f.id),submittedBy:user.displayName,submittedAt:at,updatedAt:at,history:[...(record?.history||[]),{at,actor:user.displayName,event:'Employee submitted actual and evidence'}]}};
+ }else{
+ if(!record)return reply({error:'The employee must submit this KPI first.'},400);
+ if(member.employeeId===m.employeeId)return reply({error:'You cannot sign off your own KPI.'},403);
+ if(body.action==='supervisor'){
+ if(!supervisorCanSign(member,m,state)||record.status!=='Submitted')return reply({error:'Only the assigned supervisor can sign a submitted KPI.'},403);
+ if(body.signoff!==true)return reply({error:'Confirm supervisor sign-off.'},400);
+ record.supervisor={actorId:member.id,actor:user.displayName,at,note};record.final=undefined;record.status='Supervisor approved';
+ }else if(body.action==='final'){
+ if(!management(member)||record.status!=='Supervisor approved')return reply({error:'Final approval requires Admin or CEO and prior supervisor sign-off.'},403);
+ if(body.signoff!==true)return reply({error:'Confirm final sign-off.'},400);
+ record.final={actorId:member.id,actor:user.displayName,at,note};record.status='Final approved';
+ }else if(body.action==='return'){
+ if(!(management(member)||supervisorCanSign(member,m,state))||record.status==='Final approved'&&!management(member))return reply({error:'Your role cannot return this KPI.'},403);
+ if(!note)return reply({error:'Give a reason when returning a KPI.'},400);record.history.push({at,actor:user.displayName,event:'Archived before return',snapshot:JSON.parse(JSON.stringify(record.snapshot)),metricSnapshot:JSON.parse(JSON.stringify(record.metricSnapshot)),supervisor:record.supervisor,final:record.final});record.status='Returned';record.supervisor=undefined;record.final=undefined;
+ }else return reply({error:'Select submit, supervisor sign-off, final approval or return.'},400);
+ record.updatedAt=at;record.history.push({at,actor:user.displayName,event:`${body.action}: ${note||'Signed off'}`});
+ }
+ metricId=m.id;detail=`KPI review ${body.action} · ${m.name} · ${period}`;
+ }else if(body.type==='entry'){
  const m=state.metrics.find(m=>m.id===body.metricId),e=body.entry as Entry;
  if(!m||!validPeriod(body.period)||!e||!validEntry(e,m))return reply({error:'Check the target range, numeric values and evidence URL.'},400);
  const old=state.entries[`${m.id}:${body.period}`]||emptyEntry;
+ if(m.employeeId&&!editableActual(state,member,m,body.period))return reply({error:'Actuals and evidence can only change in an open review window before submission, or after the KPI is returned.'},403);
+ if(!management(member)&&old.notes!==e.notes)return reply({error:'Review notes are reserved for the evaluator.'},403);
  if(!canSetTarget(member,m)&&(old.target!==e.target||old.upper!==e.upper))return reply({error:'Your role cannot change targets for this KPI.'},403);
  const supervisorCorrection=canOverrideActual(member,m,state);
  if(!canEnterActual(member,m)&&!supervisorCorrection&&old.actual!==e.actual)return reply({error:'Your role cannot enter actual results for this KPI.'},403);
@@ -55,15 +91,16 @@ export async function POST(request:Request){
  const amount=body.revenueContribution;if(amount!==null&&(typeof amount!=='number'||!Number.isFinite(amount)||amount<0))return reply({error:'Sales revenue contribution must be a non-negative USD amount or blank.'},400);
  state.revenueContributions={...(state.revenueContributions||{}),[`${m.employeeId}:${body.period}`]:{employeeId:m.employeeId,period:body.period,amount,metricId:m.id,updatedAt:at}};
  }
- state.entries[`${m.id}:${body.period}`]={target:e.target,upper:e.upper,actual:e.actual,notes:e.notes,evidence:e.evidence,evidenceNotes:e.evidenceNotes||'',evidenceLinks:e.evidenceLinks||[],updatedAt:at};metricId=m.id;detail=`${m.name} · ${body.period}: target ${e.target??'blank'}, actual ${e.actual??'blank'}`;
+ state.entries[`${m.id}:${body.period}`]={target:e.target,upper:e.upper,actual:e.actual,notes:e.notes,evidence:e.evidence,evidenceNotes:e.evidenceNotes||'',evidenceLinks:e.evidenceLinks||[],updatedAt:at};invalidateReview(state,m,body.period,user.displayName,'Actual, target or evidence updated; previous sign-offs cleared',supervisorCorrection);metricId=m.id;detail=`${m.name} · ${body.period}: target ${e.target??'blank'}, actual ${e.actual??'blank'}`;
  }else if(body.type==='metric'){
  const incoming=body.metric as Metric;const old=state.metrics.find(m=>m.id===incoming?.id);
  if(!old)return reply({error:'Select an existing KPI to edit.'},400);
  if(!canEditMetric(member,old))return reply({error:'Your role cannot configure this KPI.'},403);
+ if(Object.values(state.reviews||{}).some(r=>r.metricId===old.id&&['Submitted','Supervisor approved'].includes(r.status)&&r.period!==body.period))return reply({error:'Select the submitted review cycle before changing this KPI definition.'},409);
  if(typeof incoming.name!=='string'||!incoming.name.trim()||incoming.name.length>150||typeof incoming.unit!=='string'||!incoming.unit||incoming.unit.length>30||!['higher','lower','range'].includes(incoming.direction)||typeof incoming.owner!=='string'||incoming.owner.length>100||typeof incoming.definition!=='string'||incoming.definition.length>4000)return reply({error:'Please complete the KPI definition.'},400);
  if(incoming.organizationalKpiIds!==undefined&&(!Array.isArray(incoming.organizationalKpiIds)||incoming.organizationalKpiIds.some(id=>typeof id!=='string'||!state.metrics.some(m=>m.id===id&&m.layer==='organizational'&&(old.orgGoals||[old.goal]).includes(m.goal)))))return reply({error:'Select valid organizational KPI links.'},400);
  if(incoming.briefDescription!==undefined&&(typeof incoming.briefDescription!=='string'||incoming.briefDescription.length>180)||incoming.expectedOutcome!==undefined&&(typeof incoming.expectedOutcome!=='string'||incoming.expectedOutcome.length>220))return reply({error:'Keep the description and expected outcome brief.'},400);
- Object.assign(old,{organizationalKpiIds:incoming.organizationalKpiIds===undefined?old.organizationalKpiIds:[...new Set(incoming.organizationalKpiIds)],name:incoming.name,unit:incoming.unit,direction:incoming.direction,owner:incoming.owner,definition:incoming.definition,briefDescription:incoming.briefDescription||'',expectedOutcome:incoming.expectedOutcome||''});metricId=old.id;detail=`Updated KPI definition: ${old.name}`;
+ Object.assign(old,{organizationalKpiIds:incoming.organizationalKpiIds===undefined?old.organizationalKpiIds:[...new Set(incoming.organizationalKpiIds)],name:incoming.name,unit:incoming.unit,direction:incoming.direction,owner:incoming.owner,definition:incoming.definition,briefDescription:incoming.briefDescription||'',expectedOutcome:incoming.expectedOutcome||''});for(const [key,r] of Object.entries(state.reviews||{}))if(r.metricId===old.id&&r.period===body.period)invalidateReview(state,old,r.period,user.displayName,'KPI definition changed; resubmission required');metricId=old.id;detail=`Updated KPI definition: ${old.name}`;
  }else if(body.type==='levels'){
  const id=String(body.metricId||''),m=state.metrics.find(m=>m.id===id),employee=id.startsWith('scorecard:')?state.employees?.find(e=>e.id===id.slice(10)):null;
  if(!m&&!employee||!validPeriod(body.period))return reply({error:'Select a valid KPI or employee scorecard and period.'},400);
@@ -79,9 +116,15 @@ export async function POST(request:Request){
  if(!['Open','Acknowledged','Resolved'].includes(incoming.status)||typeof incoming.managerNote!=='string'||incoming.managerNote.length>2000)return reply({error:'Select a review status and keep the manager note concise.'},400);
  Object.assign(previous!,{status:incoming.status,managerNote:incoming.managerNote,updatedAt:at});detail=`Manager ${incoming.status.toLowerCase()} early warning: ${m.name}`;
  }else{
- if(!canEnterActual(member,m)||previous&&previous.raisedById!==member.id&&member.role!=='General Admin')return reply({error:'You can only raise or edit a warning for your own assigned KPI.'},403);
- if(!validPeriod(incoming.period)||typeof incoming.reason!=='string'||!incoming.reason.trim()||incoming.reason.length>2000||typeof incoming.helpNeeded!=='string'||incoming.helpNeeded.length>2000||!['At risk','Unlikely to achieve'].includes(incoming.severity)||incoming.forecastActual!==null&&(typeof incoming.forecastActual!=='number'||!Number.isFinite(incoming.forecastActual)))return reply({error:'Explain the risk and select the correct reporting period.'},400);
- const routed=flagRecipients(state,m.employeeId,m,member.id),flag:RiskFlag={id:previous?.id||crypto.randomUUID(),metricId:m.id,employeeId:m.employeeId,period:incoming.period,reason:incoming.reason.trim(),helpNeeded:incoming.helpNeeded,forecastActual:incoming.forecastActual,severity:incoming.severity,status:previous?.status||'Open',raisedById:previous?.raisedById||member.id,raisedBy:previous?.raisedBy||user.displayName,raisedAt:previous?.raisedAt||at,updatedAt:at,...routed,managerNote:previous?.managerNote||''};
+ const category=previous?.category||incoming.category||'Employee risk';
+ if(!['Employee risk','Management alert','Help request'].includes(category))return reply({error:'Select a valid alert or help request.'},400);
+ if(category==='Management alert'?!(management(member)||canOverrideActual(member,m,state)):member.employeeId!==m.employeeId)return reply({error:'Only the assigned supervisor or management can raise alerts; employees may raise their own risks and help requests.'},403);
+ if(previous&&previous.raisedById!==member.id&&!management(member))return reply({error:'Only the author or management can edit this alert.'},403);
+ if(!validPeriod(incoming.period)||typeof incoming.reason!=='string'||!incoming.reason.trim()||incoming.reason.length>2000||typeof incoming.helpNeeded!=='string'||incoming.helpNeeded.length>2000||(category==='Management alert'?!['Amber','Red'].includes(incoming.severity):!['At risk','Unlikely to achieve'].includes(incoming.severity))||incoming.forecastActual!==null&&(typeof incoming.forecastActual!=='number'||!Number.isFinite(incoming.forecastActual)))return reply({error:'Explain the risk or help request and select a valid priority and period.'},400);
+ let routed=flagRecipients(state,m.employeeId,m,member.id);
+ if(category==='Management alert'){const recipients=state.members?.filter(x=>x.employeeId===m.employeeId||x.id===member.id)||[];routed={recipientIds:recipients.map(x=>x.id),recipientNames:recipients.map(x=>x.name)};}
+ if(category==='Help request'&&incoming.helpRecipient==='CEO'){const recipients=state.members?.filter(x=>x.role==='CEO'&&x.id!==member.id)||[];if(!recipients.length)return reply({error:'Ask management to assign a CEO account before routing help directly to the CEO.'},400);routed={recipientIds:recipients.map(x=>x.id),recipientNames:recipients.map(x=>x.name)};}
+ const flag:RiskFlag={id:previous?.id||crypto.randomUUID(),metricId:m.id,employeeId:m.employeeId,period:incoming.period,category:category as RiskFlag['category'],helpRecipient:category==='Help request'&&incoming.helpRecipient==='CEO'?'CEO':'Supervisor',reason:incoming.reason.trim(),helpNeeded:incoming.helpNeeded,forecastActual:incoming.forecastActual,severity:incoming.severity,status:previous?.status||'Open',raisedById:previous?.raisedById||member.id,raisedBy:previous?.raisedBy||user.displayName,raisedAt:previous?.raisedAt||at,updatedAt:at,...routed,managerNote:previous?.managerNote||''};
  if(previous)state.riskFlags![state.riskFlags!.indexOf(previous)]=flag;else state.riskFlags=[flag,...(state.riskFlags||[])];detail=`Early warning raised: ${m.name} · ${incoming.period} · ${incoming.severity}`;
  }metricId=m.id;
  }else if(body.type==='action'){
@@ -92,21 +135,35 @@ export async function POST(request:Request){
  const clean={id:previous?.id||crypto.randomUUID(),metricId:m.id,period:a.period,title:a.title,owner:a.owner,due:a.due,status:a.status,createdAt:previous?.createdAt||at};
  if(previous)state.actions[state.actions.indexOf(previous)]=clean;else state.actions.push(clean);metricId=m.id;detail=`${a.title} · ${a.status} · due ${a.due}`;
  }else if(body.type==='member'){
- if(member.role!=='General Admin')return reply({error:'Only the General Admin can manage access.'},403);
- const m=body.member as Member;if(!m||typeof m.email!=='string'||!/^\S+@\S+\.\S+$/.test(m.email)||m.email.length>200||typeof m.name!=='string'||!m.name.trim()||m.name.length>100||!roles.includes(m.role)||!Array.isArray(m.departments)||m.departments.some(d=>!departments.includes(d)))return reply({error:'Complete the name, email, role and departments.'},400);
+ if(!management(member))return reply({error:'Only Admin and CEO can manage access.'},403);
+ const m=body.member as Member;if(!m||typeof m.email!=='string'||!/^\S+@\S+\.\S+$/.test(m.email)||m.email.length>200||typeof m.name!=='string'||!m.name.trim()||m.name.length>100||!roles.includes(m.role)||!Array.isArray(m.departments)||m.departments.some(d=>!knownDepartments.includes(d)))return reply({error:'Complete the name, email, role and departments.'},400);
  if(m.employeeId&&!state.employees?.some(e=>e.id===m.employeeId))return reply({error:'Select a valid employee scorecard.'},400);
  if(m.employeeId&&state.members!.some(x=>x.id!==m.id&&x.employeeId===m.employeeId))return reply({error:'This employee scorecard is already assigned to another account.'},400);
  if(m.role==='Individual Employee'&&!m.employeeId||m.role==='Functional Leader'&&!m.departments.length)return reply({error:'Employees need a scorecard. Functional Leaders need at least one department.'},400);
  const old=state.members!.find(x=>x.id===m.id);if(state.members!.some(x=>x.id!==m.id&&x.email.toLowerCase()===m.email.toLowerCase()))return reply({error:'This email already has a role.'},400);
  if(old?.role==='General Admin'&&m.role!=='General Admin'&&state.members!.filter(x=>x.role==='General Admin').length===1)return reply({error:'Keep at least one General Admin.'},400);
- if(old?.id===member.id&&(m.email.toLowerCase()!==member.email.toLowerCase()||m.role!=='General Admin'))return reply({error:'Keep your current administrator access. Assign another administrator first.'},400);
+ if(old?.id===member.id&&(m.email.toLowerCase()!==member.email.toLowerCase()||m.role!==member.role))return reply({error:'Keep your current role and sign-in email. Assign another authorized manager first.'},400);
  const dep=m.role==='Individual Employee'?[...new Set(state.metrics.filter(metric=>metric.employeeId===m.employeeId).map(metric=>metric.department!).filter(Boolean))]:m.departments;
  const clean:Member={id:old?.id||crypto.randomUUID(),email:m.email.toLowerCase(),name:m.name.trim(),role:m.role,departments:dep,employeeId:m.employeeId||'',...(old?.userId&&old.email.toLowerCase()===m.email.toLowerCase()?{userId:old.userId}:{})};
  if(old)state.members![state.members!.indexOf(old)]=clean;else state.members!.push(clean);detail=`Assigned ${clean.role}: ${clean.name}`;
+ }else if(body.type==='department'){
+ if(!management(member))return reply({error:'Only Admin and CEO can define departments.'},403);
+ if(typeof body.name!=='string'||!body.name.trim()||body.name.trim().length>80||knownDepartments.some(d=>d.toLowerCase()===body.name.trim().toLowerCase()))return reply({error:'Enter a unique department name.'},400);
+ state.departments=[...(state.departments||[]),body.name.trim()];detail=`Created department: ${body.name.trim()}`;
  }else if(body.type==='employee'){
- if(member.role!=='General Admin')return reply({error:'Only the General Admin can manage employee profiles.'},403);
- const employee=state.employees?.find(e=>e.id===body.employeeId);if(!employee||typeof body.name!=='string'||!body.name.trim()||body.name.length>100)return reply({error:'Enter an employee name.'},400);
+ if(!management(member))return reply({error:'Only Admin and CEO can manage employee profiles.'},403);
+ if(typeof body.name!=='string'||!body.name.trim()||body.name.length>100||typeof body.department!=='string'||!knownDepartments.includes(body.department)||typeof body.designation!=='string'||!body.designation.trim()||body.designation.length>100||typeof body.supervisory!=='boolean')return reply({error:'Complete employee name, designation, department and supervisor status.'},400);
+ let employee=state.employees?.find(e=>e.id===body.employeeId);
+ if(body.employeeId&&!employee)return reply({error:'Select an existing employee profile.'},400);
+ if(!employee){const template=body.templateEmployeeId?state.employees?.find(e=>e.id===body.templateEmployeeId):null;if(body.templateEmployeeId&&!template)return reply({error:'Choose a valid scorecard template.'},400);
+ employee={id:'EMP-'+crypto.randomUUID(),name:body.name.trim(),department:body.department,designation:body.designation.trim(),supervisory:body.supervisory};state.employees=[...(state.employees||[]),employee];
+ if(template){const source=state.metrics.filter(m=>m.employeeId===template.id);const cloned=source.map(m=>({...m,id:employee!.id+'_'+m.id,employeeId:employee!.id,owner:employee!.name,designation:employee!.designation,department:m.department===template.department?employee!.department:m.department,layer:employee!.supervisory?'supervisory' as const:'individual' as const}));state.metrics.push(...cloned);}
+ }else{const oldDepartment=employee.department;employee.department=body.department;employee.designation=body.designation.trim();employee.supervisory=body.supervisory;state.metrics.filter(m=>m.employeeId===employee!.id).forEach(m=>{if(m.department===oldDepartment)m.department=employee!.department;m.designation=employee!.designation;m.layer=employee!.supervisory?'supervisory':'individual';});}
+
+ if(body.templateEmployeeId&&!state.metrics.some(m=>m.employeeId===employee!.id)){const template=state.employees?.find(e=>e.id===body.templateEmployeeId);if(!template||template.id===employee.id)return reply({error:'Select an existing scorecard template.'},400);const source=state.metrics.filter(m=>m.employeeId===template.id);state.metrics.push(...source.map(m=>({...m,id:employee!.id+'_'+m.id,employeeId:employee!.id,owner:employee!.name,designation:employee!.designation,department:m.department===template.department?employee!.department:m.department,layer:employee!.supervisory?'supervisory' as const:'individual' as const})));}
+
  if(body.managerId!==undefined){const manager=state.members?.find(m=>m.id===body.managerId);if(body.managerId&&(!manager||manager.role==='Individual Employee'||manager.role==='Functional Leader'&&!state.metrics.some(m=>m.employeeId===employee.id&&manager.departments.includes(m.department||''))))return reply({error:'Choose an administrator, CEO or a Functional Leader with access to this employee’s functions.'},400);employee.managerId=String(body.managerId);}
+ for(const linked of state.members||[])if(linked.employeeId===employee.id&&linked.role==='Individual Employee')linked.departments=[employee.department];
  employee.name=body.name.trim();state.metrics.filter(m=>m.employeeId===employee.id).forEach(m=>m.owner=employee.name);for(const flag of state.riskFlags||[])if(flag.employeeId===employee.id&&flag.status!=='Resolved'){const m=state.metrics.find(m=>m.id===flag.metricId);if(m)Object.assign(flag,flagRecipients(state,employee.id,m,flag.raisedById));}detail=`Updated employee profile: ${employee.name}`;
  }else return reply({error:'Unsupported update.'},400);
  if(body.type==='entry'&&typeof body.justification==='string'&&body.justification.trim())detail+=` · supervisor justification: ${body.justification.trim()}`;

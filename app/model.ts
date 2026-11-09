@@ -13,7 +13,7 @@ export type Employee={id:string;name:string;designation:string;department:string
 export type Metric={id:string;goal:string;name:string;unit:string;direction:'higher'|'lower'|'range';definition:string;owner:string;layer?:Layer;department?:string;employeeId?:string;designation?:string;functionalGoalId?:string;weight?:number;kpiType?:string;orgGoals?:string[];organizationalKpiIds?:string[];briefDescription?:string;expectedOutcome?:string};
 export type LevelBand={level:'L1'|'L2'|'L3'|'L4'|'L5';min:number|null;max:number|null};
 export type LevelConfig={basis:'actual'|'achievement';bands:LevelBand[];updatedAt?:string;updatedBy?:string};
-export type RiskFlag={id:string;metricId:string;employeeId:string;period:string;reason:string;helpNeeded:string;forecastActual:number|null;severity:'At risk'|'Unlikely to achieve';status:'Open'|'Acknowledged'|'Resolved';raisedById:string;raisedBy:string;raisedAt:string;updatedAt:string;recipientIds:string[];recipientNames:string[];managerNote:string};
+export type RiskFlag={id:string;metricId:string;employeeId:string;period:string;reason:string;helpNeeded:string;forecastActual:number|null;category?:'Employee risk'|'Management alert'|'Help request';helpRecipient?:'Supervisor'|'CEO';severity:'At risk'|'Unlikely to achieve'|'Amber'|'Red';status:'Open'|'Acknowledged'|'Resolved';raisedById:string;raisedBy:string;raisedAt:string;updatedAt:string;recipientIds:string[];recipientNames:string[];managerNote:string};
 export type Entry={target:number|null;upper:number|null;actual:number|null;notes:string;evidence:string;evidenceNotes?:string;evidenceLinks?:string[];updatedAt?:string};
 export type EvidenceFile={id:string;metricId:string;period:string;name:string;size:number;type:string;uploadedAt:string;uploadedBy:string};
 export type RevenueContribution={employeeId:string;period:string;amount:number|null;metricId:string;updatedAt:string};
@@ -22,7 +22,10 @@ export type Audit={id:string;at:string;actor:string;event:string;detail:string;m
 export type AchievementSummary={department:string;period:string;employeeId?:string;name?:string;designation?:string;earnedPct:number|null;coveragePct:number;measuredGapPct:number;pendingPct:number;assessedCount:number;count:number;possible:number;ownContributionPct?:number|null;ownEarnedSharePct?:number|null};
 export type OrganizationOverview={metrics:Pick<Metric,'id'|'name'|'goal'|'unit'|'direction'>[];entries:Record<string,Pick<Entry,'target'|'upper'|'actual'>>};
 export type ActualAdjustment={id:string;metricId:string;period:string;before:number;after:number;justification:string;at:string;actorId:string;actor:string};
-export type State={actualAdjustments?:ActualAdjustment[];organizationOverview?:OrganizationOverview;departmentGoalAchievements?:(AchievementSummary&{goal:string})[];departmentAchievements?:AchievementSummary[];teamAchievements?:AchievementSummary[];metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
+export type ReviewSignoff={actorId:string;actor:string;at:string;note:string};
+export type ReviewRecord={metricId:string;employeeId:string;period:string;status:'Draft'|'Returned'|'Submitted'|'Supervisor approved'|'Final approved';snapshot:Entry;metricSnapshot:Metric;evidenceFileIds:string[];submittedBy:string;submittedAt:string;updatedAt:string;supervisor?:ReviewSignoff;final?:ReviewSignoff;history:{at:string;actor:string;event:string;snapshot?:Entry;metricSnapshot?:Metric;supervisor?:ReviewSignoff;final?:ReviewSignoff}[]};
+export type ReviewWindow={open:boolean;updatedAt:string;updatedBy:string};
+export type State={departments?:string[];reviews?:Record<string,ReviewRecord>;reviewWindows?:Record<string,ReviewWindow>;actualAdjustments?:ActualAdjustment[];organizationOverview?:OrganizationOverview;departmentGoalAchievements?:(AchievementSummary&{goal:string})[];departmentAchievements?:AchievementSummary[];teamAchievements?:AchievementSummary[];metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
 const rows:[string,string,string,Metric['direction'],string][]=[
  ['G1','Revenue','USD','higher','Recognized revenue for the selected period.'],
  ['G1','Gross margin','%','higher','Gross profit ÷ recognized revenue × 100.'],
@@ -74,7 +77,7 @@ export function evaluate(m:Metric,e:Entry|undefined){
  const achievement=m.direction==='higher'&&e.target>0?e.actual/e.target*100:m.direction==='lower'&&e.target>0&&e.actual>0?e.target/e.actual*100:null;
  return {status:met?'Met':'Needs attention',met,achievement};
 }
-export function periodLabel(period:string){return period.replace('-Annual',' · Annual').replace('-Q',' · Q').replace('-M',' · Month ');}
+export function periodLabel(period:string){return period.replace('-MidYear',' · Mid-year').replace('-YearEnd',' · Year-end').replace('-ReviewAnnual',' · Annual review').replace('-Annual',' · Annual').replace('-Q',' · Q').replace('-M',' · Month ');}
 export function validEntry(e:Entry,m:Metric){
  if([e.target,e.upper,e.actual].some(v=>v!==null&&(typeof v!=='number'||!Number.isFinite(v))))return false;
  if(typeof e.notes!=='string'||e.notes.length>4000||typeof e.evidence!=='string'||e.evidence.length>1000)return false;
