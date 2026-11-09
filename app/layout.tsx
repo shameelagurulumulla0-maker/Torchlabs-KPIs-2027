@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./dashboard.css";
+import "./workspace.css";
+import "./torchlabs-theme.css";
+import "./contribution.css";
+import "./performance.css";
 
 export const metadata: Metadata = {
   title: "Torchlabs · KPI Evaluator",

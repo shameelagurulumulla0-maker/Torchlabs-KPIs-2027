@@ -6,11 +6,20 @@ export const goals=[
  {id:'G5',name:'Operational Maturity & Scalable Execution',short:'Operational maturity',color:'#677f99'},
  {id:'G6',name:'High Performance & Accountability',short:'People & accountability',color:'#9b738a'},
 ];
-export type Metric={id:string;goal:string;name:string;unit:string;direction:'higher'|'lower'|'range';definition:string;owner:string};
-export type Entry={target:number|null;upper:number|null;actual:number|null;notes:string;evidence:string;updatedAt?:string};
+export type Layer='organizational'|'departmental'|'supervisory'|'individual';
+export type Role='Individual Employee'|'Functional Leader'|'CEO'|'General Admin';
+export type Member={id:string;email:string;name:string;role:Role;departments:string[];employeeId:string;userId?:string};
+export type Employee={id:string;name:string;designation:string;department:string;supervisory:boolean;managerId?:string};
+export type Metric={id:string;goal:string;name:string;unit:string;direction:'higher'|'lower'|'range';definition:string;owner:string;layer?:Layer;department?:string;employeeId?:string;designation?:string;functionalGoalId?:string;weight?:number;kpiType?:string;orgGoals?:string[];briefDescription?:string;expectedOutcome?:string};
+export type LevelBand={level:'L1'|'L2'|'L3'|'L4'|'L5';min:number|null;max:number|null};
+export type LevelConfig={basis:'actual'|'achievement';bands:LevelBand[];updatedAt?:string;updatedBy?:string};
+export type RiskFlag={id:string;metricId:string;employeeId:string;period:string;reason:string;helpNeeded:string;forecastActual:number|null;severity:'At risk'|'Unlikely to achieve';status:'Open'|'Acknowledged'|'Resolved';raisedById:string;raisedBy:string;raisedAt:string;updatedAt:string;recipientIds:string[];recipientNames:string[];managerNote:string};
+export type Entry={target:number|null;upper:number|null;actual:number|null;notes:string;evidence:string;evidenceNotes?:string;evidenceLinks?:string[];updatedAt?:string};
+export type EvidenceFile={id:string;metricId:string;period:string;name:string;size:number;type:string;uploadedAt:string;uploadedBy:string};
+export type RevenueContribution={employeeId:string;period:string;amount:number|null;metricId:string;updatedAt:string};
 export type Action={id:string;metricId:string;period:string;title:string;owner:string;due:string;status:'Open'|'In progress'|'Done';createdAt:string};
-export type Audit={id:string;at:string;actor:string;event:string;detail:string};
-export type State={metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[]};
+export type Audit={id:string;at:string;actor:string;event:string;detail:string;metricId?:string};
+export type State={metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
 const rows:[string,string,string,Metric['direction'],string][]=[
  ['G1','Revenue','USD','higher','Recognized revenue for the selected period.'],
  ['G1','Gross margin','%','higher','Gross profit ÷ recognized revenue × 100.'],
@@ -67,5 +76,7 @@ export function validEntry(e:Entry,m:Metric){
  if([e.target,e.upper,e.actual].some(v=>v!==null&&(typeof v!=='number'||!Number.isFinite(v))))return false;
  if(typeof e.notes!=='string'||e.notes.length>4000||typeof e.evidence!=='string'||e.evidence.length>1000)return false;
  if(e.evidence&&!/^https?:\/\//i.test(e.evidence))return false;
+ if(e.evidenceNotes!==undefined&&(typeof e.evidenceNotes!=='string'||e.evidenceNotes.length>4000))return false;
+ if(e.evidenceLinks!==undefined&&(!Array.isArray(e.evidenceLinks)||e.evidenceLinks.length>10||e.evidenceLinks.some(url=>typeof url!=='string'||url.length>1000||!/^https?:\/\//i.test(url))))return false;
  return !(m.direction==='range'&&e.target!==null&&e.upper!==null&&e.upper<e.target);
 }

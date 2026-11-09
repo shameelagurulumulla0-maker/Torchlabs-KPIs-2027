@@ -1,0 +1,2288 @@
+{
+  "kpis": [
+    {
+      "id": "SDE-01",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Commissionable Profit Achievement",
+      "weight": 0.2,
+      "goals": "G1",
+      "formula": "Actual Commissionable Profit Generated ÷ Assigned Commissionable Profit Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-02",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "New Customer Acquisition Achievement",
+      "weight": 0.12,
+      "goals": "G1, G2",
+      "formula": "Eligible New Customers Acquired ÷ Assigned New Customer Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-03",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Qualified Prospecting & Outbound Achievement",
+      "weight": 0.14,
+      "goals": "G1, G2",
+      "formula": "Qualified Prospects Completing Required Outbound Engagement ÷ Assigned Qualified Prospecting & Outbound Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-04",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Sales Conversion Achievement",
+      "weight": 0.09,
+      "goals": "G1",
+      "formula": "Successfully Converted Qualified Opportunities ÷ Qualified Opportunities Concluded × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-05",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Existing Customer Revenue Retention Achievement",
+      "weight": 0.08,
+      "goals": "G1, G4",
+      "formula": "Eligible Existing-Customer Revenue Retained ÷ Opening Eligible Existing-Customer Revenue Base × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-06",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Existing Customer Expansion Achievement",
+      "weight": 0.07,
+      "goals": "G1, G4",
+      "formula": "Actual Eligible Existing-Customer Expansion Revenue ÷ Assigned Existing-Customer Expansion Revenue Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-07",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "At-Risk Customer Recovery Achievement",
+      "weight": 0.04,
+      "goals": "G4",
+      "formula": "Eligible At-Risk Customers Retained/Recovered ÷ Eligible At-Risk Customers Assigned for Recovery × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-08",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Quality Sales Achievement",
+      "weight": 0.04,
+      "goals": "G1, G4",
+      "formula": "Eligible Sales Completed Without Sales-Controllable Return/Refund ÷ Total Eligible Sales Completed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-09",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Sales Pipeline & CRM Compliance",
+      "weight": 0.02,
+      "goals": "G1, G5",
+      "formula": "Sales Opportunities/Records Meeting Required Pipeline & CRM Standards ÷ Sales Opportunities/Records Reviewed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Sales Development Executive, corrected scorecard; KPI 9",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-HR01",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SDE-HR02",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "SDE-HR03",
+      "role": "Sales Development Executive",
+      "code": "SDE",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-01",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Strategic Commercial Pipeline Achievement",
+      "weight": 0.16,
+      "goals": "G1",
+      "formula": "Actual Eligible Qualified Pipeline Value ÷ Assigned Qualified Pipeline Value Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-02",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Strategic SQL Generation Achievement",
+      "weight": 0.13,
+      "goals": "G1",
+      "formula": "Eligible SQLs Generated ÷ Assigned SQL Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-03",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "GTM-Sourced Opportunity Progression Achievement",
+      "weight": 0.1,
+      "goals": "G1",
+      "formula": "Eligible GTM-Sourced Opportunities Progressing to the Defined Commercial Stage ÷ Eligible GTM-Sourced Opportunities Due for Progression Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-04",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Strategic Market Development & Validation Achievement",
+      "weight": 0.1,
+      "goals": "G2",
+      "formula": "Assigned Market Opportunities Successfully Validated Against Predefined Criteria ÷ Market Opportunities Due for Validation × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-05",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Strategic Market & Product Commercialization Achievement",
+      "weight": 0.11,
+      "goals": "G1, G2",
+      "formula": "Approved Market/Product Commercialization Initiatives Meeting Predefined Commercial-Readiness Criteria ÷ Commercialization Initiatives Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-06",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Strategic GTM & Market Intelligence Analytics Achievement",
+      "weight": 0.1,
+      "goals": "G1, G2, G5",
+      "formula": "Required Strategic GTM/Market Analyses Delivered On Time and Meeting Predefined Acceptance Criteria ÷ Analyses Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-07",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Advanced GTM Automation & CRM Optimization Delivery",
+      "weight": 0.07,
+      "goals": "G1, G5",
+      "formula": "Approved GTM Automation/CRM Optimization Deliverables Completed and Meeting Acceptance Criteria ÷ Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-08",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "GTM Framework & Commercial Readiness Achievement",
+      "weight": 0.03,
+      "goals": "G2, G5",
+      "formula": "Required GTM Frameworks/Playbooks/Commercial Enablement Items Approved, Current and Operationally Ready ÷ Required Items Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior GTM & Analytics, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-HR01",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SGTM-HR02",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "SGTM-HR03",
+      "role": "Senior GTM & Analytics",
+      "code": "SGTM",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-01",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "Qualified Lead Development Achievement",
+      "weight": 0.16,
+      "goals": "G1, G2",
+      "formula": "Eligible Qualified Leads Developed and Accepted for the Defined Next Commercial Stage ÷ Assigned Qualified Lead Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-02",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "GTM Campaign & Market Execution Achievement",
+      "weight": 0.12,
+      "goals": "G1, G2",
+      "formula": "Assigned GTM Campaign/Market Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Assigned GTM Campaign/Market Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-03",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "Market Research & Validation Achievement",
+      "weight": 0.1,
+      "goals": "G2",
+      "formula": "Assigned Market Research/Validation Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Assigned Market Research/Validation Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-04",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "GTM Market & Performance Analytics Achievement",
+      "weight": 0.13,
+      "goals": "G1, G2, G5",
+      "formula": "Required GTM/Market/Performance Analyses Delivered On Time and Meeting Predefined Acceptance Criteria ÷ Required Analyses Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-05",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "CRM Data & Process Compliance",
+      "weight": 0.12,
+      "goals": "G1, G5",
+      "formula": "Applicable GTM CRM Records/Processes Meeting Required Standards ÷ Applicable GTM CRM Records/Processes Reviewed × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-06",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "GTM Automation Delivery & Reliability Achievement",
+      "weight": 0.09,
+      "goals": "G1, G5",
+      "formula": "Assigned GTM Automation Deliverables Meeting Required Functional and Reliability Criteria ÷ Assigned Automation Deliverables Due for Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-07",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "Assigned GTM Initiative Achievement",
+      "weight": 0.05,
+      "goals": "G1, G2, G5",
+      "formula": "Assigned GTM Strategic/Improvement Initiatives Completed On Time and Meeting Predefined Success Criteria ÷ Assigned Initiatives Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-08",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "GTM Process & Enablement Readiness Achievement",
+      "weight": 0.03,
+      "goals": "G2, G5",
+      "formula": "Required GTM Processes, Guides, Templates or Enablement Items Approved, Current and Operationally Ready ÷ Required Items Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: GTM & Analytics, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-HR01",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "GTM-HR02",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "GTM-HR03",
+      "role": "GTM & Analytics",
+      "code": "GTM",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-01",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Support Operational Control Compliance",
+      "weight": 0.1,
+      "goals": "G4, G5",
+      "formula": "Compliant Applicable Support Control Assessments ÷ Total Applicable Support Control Assessments × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-02",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Meaningful First Response Compliance",
+      "weight": 0.09,
+      "goals": "G4",
+      "formula": "Eligible Support Tickets Receiving a Compliant Meaningful First Response ÷ Total Eligible Support Tickets × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-03",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Technical & Supplier Escalation Compliance",
+      "weight": 0.09,
+      "goals": "G3, G4",
+      "formula": "Applicable Escalation Cases Correctly Escalated Within Required Standards ÷ Total Applicable Escalation Cases × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-04",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Resolution & Closure Compliance",
+      "weight": 0.11,
+      "goals": "G3, G4",
+      "formula": "Applicable Tickets Resolved/Closed in Compliance With Required Resolution and Closure Standards ÷ Total Applicable Resolved/Closed Tickets × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-05",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Support Response Quality Compliance",
+      "weight": 0.13,
+      "goals": "G4",
+      "formula": "Audited Support Interactions Meeting Required Response-Quality Criteria ÷ Total Support Interactions Audited × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-06",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Support Team Performance Achievement",
+      "weight": 0.11,
+      "goals": "G4, G6",
+      "formula": "Aggregate Achieved Weighted Functional KPI Score of Eligible L1 Support Team Members ÷ Aggregate Maximum Possible Weighted Functional KPI Score of Eligible L1 Support Team Members × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-07",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Support-Controllable Customer Retention Achievement",
+      "weight": 0.1,
+      "goals": "G1, G4",
+      "formula": "Eligible Support-Related At-Risk Customers Retained or Recovered ÷ Eligible Support-Related At-Risk Customers Assigned/Due for Support Retention Action × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-08",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Support Improvement & Service Enablement Achievement",
+      "weight": 0.07,
+      "goals": "G4, G5",
+      "formula": "Approved Support Improvement Initiatives Meeting Predefined Success Criteria ÷ Approved Support Improvement Initiatives Due for Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Support Functional Lead, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-HR01",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SUPL-HR02",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "SUPL-HR03",
+      "role": "Support Functional Lead",
+      "code": "SUPL",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-01",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Ticket Claim-Time Compliance",
+      "weight": 0.07,
+      "goals": "G4, G5",
+      "formula": "Eligible tickets claimed within required claim-time standard ÷ total eligible tickets × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-02",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Ticket Ownership Compliance",
+      "weight": 0.07,
+      "goals": "G4, G5",
+      "formula": "Applicable owned tickets meeting ownership requirements ÷ total applicable owned tickets × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-03",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Shift Handover & Clearance Compliance",
+      "weight": 0.07,
+      "goals": "G4, G5",
+      "formula": "Pending tickets correctly handed over or cleared ÷ total tickets requiring handover or clearance × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-04",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Meaningful First Response Compliance",
+      "weight": 0.12,
+      "goals": "G4",
+      "formula": "Eligible tickets receiving a compliant meaningful first response ÷ total eligible tickets handled × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-05",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Technical & Supplier Escalation Compliance",
+      "weight": 0.08,
+      "goals": "G3, G4",
+      "formula": "Applicable escalation cases correctly escalated within required requirements ÷ total applicable escalation cases handled × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-06",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Resolution & Closure Compliance",
+      "weight": 0.12,
+      "goals": "G3, G4",
+      "formula": "Applicable tickets resolved/closed according to required standards ÷ total applicable resolved/closed tickets handled × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-07",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Support Response Quality Compliance",
+      "weight": 0.17,
+      "goals": "G4",
+      "formula": "Audited interactions meeting required response-quality criteria ÷ total interactions audited × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-08",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "SOP & Guide Adherence Compliance",
+      "weight": 0.1,
+      "goals": "G4, G5",
+      "formula": "Audited applicable cases handled according to required SOP/guide ÷ total applicable cases audited × 100",
+      "kind": "Functional",
+      "source": "Conversation: L1 Support Agent, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-HR01",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "L1SUP-HR02",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "L1SUP-HR03",
+      "role": "L1 Support Agent",
+      "code": "L1SUP",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-01",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Supplier Relationship Governance Compliance",
+      "weight": 0.11,
+      "goals": "G3, G5",
+      "formula": "Required Supplier Governance Activities Completed On Time and Meeting Defined Requirements ÷ Total Required Supplier Governance Activities Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-02",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Supplier Issue & Proxy Supply Management Compliance",
+      "weight": 0.12,
+      "goals": "G3, G5",
+      "formula": "Applicable Supplier/Proxy Supply Issues Actioned, Followed Up and/or Escalated Within the Required Internal SLA ÷ Total Applicable Supplier/Proxy Supply Issues × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-03",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Supplier & Vendor Performance/Risk Review Compliance",
+      "weight": 0.08,
+      "goals": "G3, G5",
+      "formula": "Suppliers/Vendors Receiving Required Performance and Risk Review Within the Defined Review Cycle ÷ Total Suppliers/Vendors Due for Review × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-04",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Internal Cost Optimization Achievement",
+      "weight": 0.15,
+      "goals": "G1, G5",
+      "formula": "Verified Controllable Internal Cost Savings Realized ÷ Approved Internal Cost-Optimization Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-05",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Budget Control Compliance",
+      "weight": 0.11,
+      "goals": "G1, G5",
+      "formula": "Budget Variance % = (Actual Controllable Expenditure − Approved Adjusted Budget) ÷ Approved Adjusted Budget × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 5",
+      "direction": "Range control"
+    },
+    {
+      "id": "OPS-06",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Procurement & Payment Control Compliance",
+      "weight": 0.08,
+      "goals": "G1, G5",
+      "formula": "Applicable Purchasing and Payment Transactions Meeting All Required Control Criteria ÷ Total Applicable Purchasing and Payment Transactions Reviewed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-07",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Operational Improvement Benefit Realization",
+      "weight": 0.12,
+      "goals": "G1, G5",
+      "formula": "Verified Realized Benefit from Approved Operational Improvements ÷ Approved Operational Improvement Benefit Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-08",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Operational Administration Compliance",
+      "weight": 0.06,
+      "goals": "G5",
+      "formula": "Applicable Asset, Premises and Administrative Controls Completed Correctly and On Time ÷ Total Applicable Controls Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-09",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Operational Policy, SOP & Guide Readiness Compliance",
+      "weight": 0.07,
+      "goals": "G5",
+      "formula": "Required Operational Policies, SOPs and Guides That Are Current, Approved and Operationally Ready ÷ Total Required Operational Policies, SOPs and Guides Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Operations Manager, corrected scorecard; KPI 9",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-HR01",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.04,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "OPS-HR02",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.03,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "OPS-HR03",
+      "role": "Operations Manager",
+      "code": "OPS",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.03,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-01",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Engineering Delivery Achievement",
+      "weight": 0.12,
+      "goals": "G3, G5",
+      "formula": "Eligible Engineering Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Eligible Engineering Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-02",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Engineering Quality & First-Time-Right Achievement",
+      "weight": 0.1,
+      "goals": "G3",
+      "formula": "Eligible Engineering Deliverables Accepted Without Engineer-Controllable Material Rework ÷ Total Eligible Engineering Deliverables Assessed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-03",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Bug & Technical Issue Resolution Compliance",
+      "weight": 0.07,
+      "goals": "G3, G4",
+      "formula": "Applicable Bugs/Technical Issues Resolved or Correctly Actioned Within the Required Priority/SLA Standard ÷ Applicable Bugs/Technical Issues Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-04",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Engineering Delivery Governance & Jira Compliance",
+      "weight": 0.06,
+      "goals": "G5",
+      "formula": "Applicable Engineering Work Items Meeting Required Delivery-Governance and Jira Standards ÷ Applicable Engineering Work Items Reviewed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-05",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Technical Ecosystem Roadmap Achievement",
+      "weight": 0.13,
+      "goals": "G2, G3, G5",
+      "formula": "Approved Technical Roadmap Milestones Completed On Time and Meeting Predefined Acceptance Criteria ÷ Approved Technical Roadmap Milestones Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-06",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Technical Improvement Benefit Achievement",
+      "weight": 0.08,
+      "goals": "G1, G3, G5",
+      "formula": "Approved Technical Improvement Initiatives Achieving Predefined Measurable Benefit Criteria ÷ Approved Technical Improvement Initiatives Due for Benefit Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-07",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Engineering Team Performance Achievement",
+      "weight": 0.1,
+      "goals": "G3, G6",
+      "formula": "Aggregate Achieved Weighted Functional KPI Score of Eligible Engineering Team Members Under Senior SE Responsibility ÷ Aggregate Maximum Possible Weighted Functional KPI Score of Those Eligible Team Members × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-08",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Engineering Team Capability Achievement",
+      "weight": 0.08,
+      "goals": "G3, G6",
+      "formula": "Approved Engineering Capability Milestones Successfully Achieved ÷ Approved Engineering Capability Milestones Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-09",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Engineering Standards & Technical Documentation Readiness Compliance",
+      "weight": 0.06,
+      "goals": "G3, G5",
+      "formula": "Required Engineering Standards and Technical Documentation That Are Current, Approved and Operationally Ready ÷ Required Engineering Standards and Technical Documentation Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Senior Software Engineer, corrected scorecard; KPI 9",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-HR01",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SSE-HR02",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "SSE-HR03",
+      "role": "Senior Software Engineer",
+      "code": "SSE",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-01",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Engineering Delivery Achievement",
+      "weight": 0.14,
+      "goals": "G3, G5",
+      "formula": "Eligible Engineering Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Eligible Engineering Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-02",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "External Customer Project Delivery Achievement",
+      "weight": 0.17,
+      "goals": "G1, G3, G4, G5",
+      "formula": "Assigned External Customer Project Deliverables Completed On Time and Meeting Approved Acceptance Criteria ÷ Assigned External Customer Project Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-03",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "First-Time-Right Development Achievement",
+      "weight": 0.13,
+      "goals": "G3, G4",
+      "formula": "Eligible Development Deliverables Accepted Without Engineer-Controllable Material Rework ÷ Total Eligible Development Deliverables Assessed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-04",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Bug & Technical Issue Resolution Compliance",
+      "weight": 0.1,
+      "goals": "G3, G4",
+      "formula": "Applicable Bugs and Technical Issues Resolved or Correctly Actioned Within Required Priority/SLA Standard ÷ Total Applicable Bugs and Technical Issues Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-05",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Jira & Project Work Management Compliance",
+      "weight": 0.08,
+      "goals": "G5",
+      "formula": "Applicable Assigned Work Items Meeting Required Jira and Project Work Management Standards ÷ Total Applicable Assigned Work Items Reviewed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-06",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Customer Technical Support Delivery Compliance",
+      "weight": 0.1,
+      "goals": "G1, G3, G4",
+      "formula": "Applicable Assigned Customer Technical Support Cases/Actions Completed Within Required Technical Support Standards ÷ Total Applicable Assigned Customer Technical Support Cases/Actions Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-07",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Technical Improvement Benefit Achievement",
+      "weight": 0.05,
+      "goals": "G1, G3, G5",
+      "formula": "Approved Technical Improvement Initiatives Achieving Predefined Measurable Benefit Criteria ÷ Approved Technical Improvement Initiatives Due for Benefit Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-08",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Technical Documentation Readiness Compliance",
+      "weight": 0.03,
+      "goals": "G3, G5",
+      "formula": "Required Technical Documentation Completed On Time and Meeting Defined Readiness Standards ÷ Required Technical Documentation Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 External Customer Project & Technical Delivery, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-HR01",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEE-HR02",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "SEE-HR03",
+      "role": "Software Engineer L1 External Customer Project & Technical Delivery",
+      "code": "SEE",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-01",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Engineering Delivery Achievement",
+      "weight": 0.18,
+      "goals": "G3, G5",
+      "formula": "Eligible Engineering Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Total Eligible Engineering Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-02",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Product Upgrade & Enhancement Delivery Achievement",
+      "weight": 0.15,
+      "goals": "G1, G2, G3",
+      "formula": "Assigned Product Upgrade/Enhancement Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Total Assigned Product Upgrade/Enhancement Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-03",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "First-Time-Right Development Achievement",
+      "weight": 0.15,
+      "goals": "G3",
+      "formula": "Eligible Development Deliverables Accepted Without Engineer-Controllable Material Rework ÷ Total Eligible Development Deliverables Assessed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-04",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Bug & Technical Issue Resolution Compliance",
+      "weight": 0.1,
+      "goals": "G3, G4",
+      "formula": "Applicable Bugs/Technical Issues Resolved or Correctly Actioned Within Required Priority/SLA Standard ÷ Total Applicable Bugs/Technical Issues Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-05",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Jira Work Management Compliance",
+      "weight": 0.07,
+      "goals": "G5",
+      "formula": "Applicable Assigned Engineering Work Items Meeting Required Jira Work-Management Standards ÷ Total Applicable Assigned Engineering Work Items Reviewed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-06",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Technical Ecosystem Delivery Achievement",
+      "weight": 0.07,
+      "goals": "G2, G3, G5",
+      "formula": "Assigned Technical Ecosystem Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Total Assigned Technical Ecosystem Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-07",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Technical Improvement Benefit Achievement",
+      "weight": 0.05,
+      "goals": "G1, G3, G5",
+      "formula": "Approved Technical Improvement Initiatives Achieving Predefined Measurable Benefit Criteria ÷ Total Approved Technical Improvement Initiatives Due for Benefit Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-08",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Technical Documentation Readiness Compliance",
+      "weight": 0.03,
+      "goals": "G3, G5",
+      "formula": "Required Technical Documentation Completed On Time and Meeting Defined Readiness Standards ÷ Total Required Technical Documentation Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Software Engineer L1 Internal Development & Product, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-HR01",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "SEI-HR02",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "SEI-HR03",
+      "role": "Software Engineer L1 Internal Development & Product",
+      "code": "SEI",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-01",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "UI/UX Design Delivery Achievement",
+      "weight": 0.18,
+      "goals": "G2, G3, G5",
+      "formula": "Eligible UI/UX Design Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Total Eligible UI/UX Design Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-02",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "First-Time-Right Design Achievement",
+      "weight": 0.14,
+      "goals": "G3, G5",
+      "formula": "Eligible Design Deliverables Accepted Without Designer-Controllable Material Rework ÷ Total Eligible Design Deliverables Assessed × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-03",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "UI/UX Audit & Corrective Improvement Compliance",
+      "weight": 0.13,
+      "goals": "G3, G4",
+      "formula": "Applicable UI/UX Audit Requirements Completed and Required Corrective Actions Addressed Within Defined Standards/Timeframes ÷ Total Applicable UI/UX Audit Requirements Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-04",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "Product & Feature Design Delivery Achievement",
+      "weight": 0.15,
+      "goals": "G1, G2, G3",
+      "formula": "Assigned Product/Feature Design Deliverables Completed On Time and Meeting Predefined Product/Feature Acceptance Criteria ÷ Total Assigned Product/Feature Design Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-05",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "Design System & UI Consistency Compliance",
+      "weight": 0.1,
+      "goals": "G3, G5",
+      "formula": "Applicable Audited Designs Meeting Required Design-System and UI-Consistency Standards ÷ Total Applicable Designs Audited × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-06",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "UI/UX Improvement Benefit Achievement",
+      "weight": 0.07,
+      "goals": "G1, G3, G4",
+      "formula": "Approved UI/UX Improvement Initiatives Achieving Predefined Measurable Benefit Criteria ÷ Total Approved UI/UX Improvement Initiatives Due for Benefit Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-07",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "UI/UX Documentation Readiness Compliance",
+      "weight": 0.03,
+      "goals": "G3, G5",
+      "formula": "Required UI/UX Documentation Completed On Time and Meeting Defined Readiness Standards ÷ Total Required UI/UX Documentation Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: UI/UX Designer, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-HR01",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "UX-HR02",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "UX-HR03",
+      "role": "UI/UX Designer",
+      "code": "UX",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-01",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Website Availability & Continuity Achievement",
+      "weight": 0.16,
+      "goals": "G1, G3, G4",
+      "formula": "Eligible Website Available Time ÷ Total Eligible Scheduled Website Availability Time × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-02",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Website Monitoring & Preventive Control Compliance",
+      "weight": 0.09,
+      "goals": "G3, G5",
+      "formula": "Required Website Monitoring and Preventive Controls Completed Correctly and On Time ÷ Total Required Website Monitoring and Preventive Controls Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-03",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Website Audit & Corrective Action Compliance",
+      "weight": 0.1,
+      "goals": "G3, G4, G5",
+      "formula": "Applicable Website Audits Completed and Required Corrective Actions Addressed Within Defined Standards/Timeframes ÷ Total Applicable Website Audit Requirements Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-04",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Web Development & Commercial Enablement Delivery Achievement",
+      "weight": 0.15,
+      "goals": "G1, G2, G5",
+      "formula": "Assigned Web Development/Commercial Enablement Deliverables Completed On Time and Meeting Predefined Acceptance Criteria ÷ Total Assigned Web Development/Commercial Enablement Deliverables Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-05",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "First-Time-Right Web Development Achievement",
+      "weight": 0.12,
+      "goals": "G3, G5",
+      "formula": "Eligible Web Development Deliverables Accepted Without Developer-Controllable Material Rework ÷ Total Eligible Web Development Deliverables Assessed × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-06",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Website Issue Resolution Compliance",
+      "weight": 0.07,
+      "goals": "G3, G4",
+      "formula": "Applicable Website Issues Resolved or Correctly Actioned Within Required Priority/SLA Standard ÷ Total Applicable Website Issues Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-07",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Website Improvement Benefit Achievement",
+      "weight": 0.08,
+      "goals": "G1, G3, G4, G5",
+      "formula": "Approved Website Improvement Initiatives Achieving Predefined Measurable Benefit Criteria ÷ Total Approved Website Improvement Initiatives Due for Benefit Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-08",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Web Operational & Documentation Readiness Compliance",
+      "weight": 0.03,
+      "goals": "G3, G5",
+      "formula": "Required Web Operational Controls and Documentation Meeting Defined Readiness Requirements ÷ Total Required Web Operational Controls and Documentation Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Web Developer, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-HR01",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "WEB-HR02",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "WEB-HR03",
+      "role": "Web Developer",
+      "code": "WEB",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-01",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Company Data Integrity Compliance",
+      "weight": 0.18,
+      "goals": "G1, G5",
+      "formula": "Applicable Audited Data Records/Fields Meeting Defined Data-Integrity Requirements ÷ Total Applicable Data Records/Fields Audited × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-02",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Data Quality Issue Resolution Compliance",
+      "weight": 0.1,
+      "goals": "G1, G5",
+      "formula": "Applicable Data-Quality Issues Resolved or Correctly Actioned Within Required Priority/SLA Standard ÷ Total Applicable Data-Quality Issues Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-03",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Cross-System Data Reconciliation Compliance",
+      "weight": 0.11,
+      "goals": "G1, G5",
+      "formula": "Required Cross-System Reconciliations Completed On Time and Meeting Defined Reconciliation Criteria/Tolerance ÷ Total Required Cross-System Reconciliations Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-04",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Business Reporting & BI Readiness Compliance",
+      "weight": 0.14,
+      "goals": "G1, G5",
+      "formula": "Required Business Reports/Dashboards Delivered On Time and Meeting Defined BI Readiness Criteria ÷ Total Required Business Reports/Dashboards Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-05",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Data Improvement & Automation Benefit Achievement",
+      "weight": 0.1,
+      "goals": "G1, G5",
+      "formula": "Approved Data Improvement/Automation Initiatives Achieving Predefined Measurable Benefit Criteria ÷ Total Approved Data Improvement/Automation Initiatives Due for Benefit Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-06",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "KPI Data Measurement Readiness Compliance",
+      "weight": 0.1,
+      "goals": "G5, G6",
+      "formula": "Required KPI Measures Meeting Complete and Validated Data-Measurement Readiness Requirements ÷ Total KPI Measures Due for Data Readiness × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-07",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Data Governance & Documentation Readiness Compliance",
+      "weight": 0.07,
+      "goals": "G5",
+      "formula": "Required Data Governance Controls and Documentation That Are Current, Complete and Operationally Ready ÷ Total Required Data Governance Controls and Documentation Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Business Analyst, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-HR01",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.08,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "BA-HR02",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "BA-HR03",
+      "role": "Business Analyst",
+      "code": "BA",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.06,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-01",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Strategic Project & Initiative Delivery Achievement",
+      "weight": 0.18,
+      "goals": "G1, G2, G3, G4, G5",
+      "formula": "Eligible Strategic Project/Initiative Milestones Completed On Time and Meeting Predefined Acceptance Criteria ÷ Total Eligible Strategic Project/Initiative Milestones Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 1",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-02",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Project Portfolio Governance & Delivery Achievement",
+      "weight": 0.13,
+      "goals": "G1, G5",
+      "formula": "Priority Projects Meeting Defined Portfolio Governance and Delivery-Health Requirements ÷ Total Priority Projects Due for Portfolio Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 2",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-03",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Project Risk, Dependency & Recovery Compliance",
+      "weight": 0.09,
+      "goals": "G1, G5",
+      "formula": "Applicable Material Project Risks, Dependencies and Delivery Exceptions Actioned, Escalated and/or Placed Under Required Recovery Control Within Defined Standards ÷ Total Applicable Cases × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 3",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-04",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Strategic Project Benefit Realization Achievement",
+      "weight": 0.1,
+      "goals": "G1, G5",
+      "formula": "Verified Realized Benefit from Eligible Strategic Projects ÷ Approved Strategic Project Benefit Target × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 4",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-05",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Cross-Functional Strategic Execution Achievement",
+      "weight": 0.09,
+      "goals": "G1, G5",
+      "formula": "Eligible Cross-Functional Strategic Actions/Commitments Completed On Time and Meeting Defined Completion Criteria ÷ Total Eligible Cross-Functional Strategic Actions/Commitments Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 5",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-06",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Business Transformation Benefit & Adoption Achievement",
+      "weight": 0.08,
+      "goals": "G1, G5, G6",
+      "formula": "Approved Transformation/Organizational Improvement Initiatives Meeting Predefined Benefit and Adoption Criteria ÷ Total Approved Initiatives Due for Assessment × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 6",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-07",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Organizational Performance & Corrective Action Compliance",
+      "weight": 0.07,
+      "goals": "G5, G6",
+      "formula": "Required Organizational Performance Reviews and Corrective Actions Completed Within Defined Governance Standards/Timeframes ÷ Total Required Performance Reviews and Corrective Actions Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 7",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-08",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Workforce Plan & Capability Readiness Achievement",
+      "weight": 0.08,
+      "goals": "G1, G5, G6",
+      "formula": "Approved Workforce/Capability Readiness Requirements Completed On Time and Meeting Predefined Readiness Criteria ÷ Total Approved Workforce/Capability Requirements Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 8",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-09",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "HR Governance & People Management Compliance",
+      "weight": 0.08,
+      "goals": "G5, G6",
+      "formula": "Applicable HR Governance and People-Management Controls Completed Correctly and On Time ÷ Total Applicable HR Governance and People-Management Controls Due × 100",
+      "kind": "Functional",
+      "source": "Conversation: Manager – HR & Projects, corrected scorecard; KPI 9",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-HR01",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Punctuality & Attendance Compliance",
+      "weight": 0.04,
+      "goals": "G6",
+      "formula": "Applicable scheduled days/shifts meeting defined punctuality and attendance requirements ÷ applicable scheduled days/shifts × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    },
+    {
+      "id": "HRP-HR02",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Unplanned Absenteeism Rate",
+      "weight": 0.03,
+      "goals": "G6",
+      "formula": "Unplanned/unapproved absence days ÷ applicable scheduled working days × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Lower is better"
+    },
+    {
+      "id": "HRP-HR03",
+      "role": "Manager – HR & Projects",
+      "code": "HRP",
+      "name": "Workplace & HR Compliance Rate",
+      "weight": 0.03,
+      "goals": "G6",
+      "formula": "Mandatory HR/company requirements met ÷ applicable mandatory requirements assessed × 100",
+      "kind": "Common HR",
+      "source": "Conversation: Common HR measurement rules; weights from latest corrected designation scorecard",
+      "direction": "Higher is better"
+    }
+  ],
+  "functionalGoals": [
+    {
+      "id": "FG-OPS-01",
+      "department": "Operations",
+      "name": "Maintain effective supplier governance, issue control and resilience",
+      "definition": "Supplier governance activities; issue handling and escalation; supplier performance/risk reviews.",
+      "orgGoals": [
+        "G3",
+        "G5"
+      ],
+      "kpiIds": [
+        "OPS-01",
+        "OPS-02",
+        "OPS-03"
+      ]
+    },
+    {
+      "id": "FG-OPS-02",
+      "department": "Operations",
+      "name": "Improve controllable cost efficiency and budget discipline",
+      "definition": "Verified cost savings; expenditure within approved budget tolerance; purchasing/payment controls; realized improvement benefits.",
+      "orgGoals": [
+        "G1",
+        "G5"
+      ],
+      "kpiIds": [
+        "OPS-04",
+        "OPS-05",
+        "OPS-06",
+        "OPS-07"
+      ]
+    },
+    {
+      "id": "FG-OPS-03",
+      "department": "Operations",
+      "name": "Maintain reliable operational controls and usable policies",
+      "definition": "Administrative control completion and operational policy, SOP and guide readiness.",
+      "orgGoals": [
+        "G5"
+      ],
+      "kpiIds": [
+        "OPS-08",
+        "OPS-09"
+      ]
+    },
+    {
+      "id": "FG-PM-01",
+      "department": "Project Management",
+      "name": "Deliver strategic projects and realize their intended benefits",
+      "definition": "Accepted strategic milestones and independently verified project benefits.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "HRP-01",
+        "HRP-04"
+      ]
+    },
+    {
+      "id": "FG-PM-02",
+      "department": "Project Management",
+      "name": "Maintain portfolio governance and resolve delivery risks and dependencies",
+      "definition": "Portfolio delivery health; risk/dependency action and recovery; cross-functional commitments outside project milestones.",
+      "orgGoals": [
+        "G1",
+        "G5"
+      ],
+      "kpiIds": [
+        "HRP-02",
+        "HRP-03",
+        "HRP-05"
+      ]
+    },
+    {
+      "id": "FG-PM-03",
+      "department": "Project Management",
+      "name": "Realize transformation benefits and adoption",
+      "definition": "Approved transformation initiatives meeting both benefit and adoption criteria.",
+      "orgGoals": [
+        "G1",
+        "G5",
+        "G6"
+      ],
+      "kpiIds": [
+        "HRP-06"
+      ]
+    },
+    {
+      "id": "FG-HR-01",
+      "department": "HR",
+      "name": "Operate effective performance reviews and corrective action",
+      "definition": "Performance reviews and corrective actions completed within governance requirements.",
+      "orgGoals": [
+        "G5",
+        "G6"
+      ],
+      "kpiIds": [
+        "HRP-07"
+      ]
+    },
+    {
+      "id": "FG-HR-02",
+      "department": "HR",
+      "name": "Build workforce readiness and maintain people governance",
+      "definition": "Workforce/capability plan readiness and timely completion of HR governance controls.",
+      "orgGoals": [
+        "G1",
+        "G5",
+        "G6"
+      ],
+      "kpiIds": [
+        "HRP-08",
+        "HRP-09"
+      ]
+    },
+    {
+      "id": "FG-HR-03",
+      "department": "HR",
+      "name": "Maintain employee attendance, punctuality and workplace compliance",
+      "definition": "Common HR measures: punctuality/attendance, unplanned absenteeism and workplace/HR compliance.",
+      "orgGoals": [
+        "G6"
+      ],
+      "kpiIds": [
+        "SDE-HR01",
+        "SDE-HR02",
+        "SDE-HR03",
+        "SGTM-HR01",
+        "SGTM-HR02",
+        "SGTM-HR03",
+        "GTM-HR01",
+        "GTM-HR02",
+        "GTM-HR03",
+        "SUPL-HR01",
+        "SUPL-HR02",
+        "SUPL-HR03",
+        "L1SUP-HR01",
+        "L1SUP-HR02",
+        "L1SUP-HR03",
+        "OPS-HR01",
+        "OPS-HR02",
+        "OPS-HR03",
+        "SSE-HR01",
+        "SSE-HR02",
+        "SSE-HR03",
+        "SEE-HR01",
+        "SEE-HR02",
+        "SEE-HR03",
+        "SEI-HR01",
+        "SEI-HR02",
+        "SEI-HR03",
+        "UX-HR01",
+        "UX-HR02",
+        "UX-HR03",
+        "WEB-HR01",
+        "WEB-HR02",
+        "WEB-HR03",
+        "BA-HR01",
+        "BA-HR02",
+        "BA-HR03",
+        "HRP-HR01",
+        "HRP-HR02",
+        "HRP-HR03"
+      ]
+    },
+    {
+      "id": "FG-SUP-01",
+      "department": "Customer Support",
+      "name": "Deliver timely, accountable support case handling",
+      "definition": "Ticket claim and ownership; handover; meaningful response; escalation; resolution and closure.",
+      "orgGoals": [
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "SUPL-02",
+        "SUPL-03",
+        "SUPL-04",
+        "L1SUP-01",
+        "L1SUP-02",
+        "L1SUP-03",
+        "L1SUP-04",
+        "L1SUP-05",
+        "L1SUP-06"
+      ]
+    },
+    {
+      "id": "FG-SUP-02",
+      "department": "Customer Support",
+      "name": "Maintain support quality, controls and SOP adherence",
+      "definition": "Audited response quality; support operational controls; SOP/guide adherence.",
+      "orgGoals": [
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "SUPL-01",
+        "SUPL-05",
+        "L1SUP-07",
+        "L1SUP-08"
+      ]
+    },
+    {
+      "id": "FG-SUP-03",
+      "department": "Customer Support",
+      "name": "Strengthen support team performance and customer retention",
+      "definition": "Team functional performance; support-controllable retention; service improvements and enablement.",
+      "orgGoals": [
+        "G1",
+        "G4",
+        "G5",
+        "G6"
+      ],
+      "kpiIds": [
+        "SUPL-06",
+        "SUPL-07",
+        "SUPL-08"
+      ]
+    },
+    {
+      "id": "FG-GTM-01",
+      "department": "GTM",
+      "name": "Generate qualified commercial demand and progress opportunities",
+      "definition": "Qualified prospects/leads, SQLs, qualified pipeline and opportunity progression.",
+      "orgGoals": [
+        "G1",
+        "G2"
+      ],
+      "kpiIds": [
+        "SGTM-01",
+        "SGTM-02",
+        "SGTM-03",
+        "GTM-01"
+      ]
+    },
+    {
+      "id": "FG-GTM-02",
+      "department": "GTM",
+      "name": "Validate markets and execute commercialization and growth initiatives",
+      "definition": "Market validation; commercialization readiness; campaign/market execution and assigned strategic initiatives.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G5"
+      ],
+      "kpiIds": [
+        "SGTM-04",
+        "SGTM-05",
+        "GTM-02",
+        "GTM-03",
+        "GTM-07"
+      ]
+    },
+    {
+      "id": "FG-GTM-03",
+      "department": "GTM",
+      "name": "Build reliable GTM automation and commercial enablement",
+      "definition": "GTM automation/CRM optimization delivery and required framework, process and enablement readiness.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G5"
+      ],
+      "kpiIds": [
+        "SGTM-07",
+        "SGTM-08",
+        "GTM-06",
+        "GTM-08"
+      ]
+    },
+    {
+      "id": "FG-AN-01",
+      "department": "Analytics",
+      "name": "Maintain trusted, reconciled commercial and company data",
+      "definition": "Data integrity; data-quality issue resolution; cross-system reconciliation; CRM data/process compliance.",
+      "orgGoals": [
+        "G1",
+        "G5"
+      ],
+      "kpiIds": [
+        "BA-01",
+        "BA-02",
+        "BA-03",
+        "GTM-05"
+      ]
+    },
+    {
+      "id": "FG-AN-02",
+      "department": "Analytics",
+      "name": "Provide timely market intelligence and decision-ready reporting",
+      "definition": "Strategic and operational GTM analyses; business reports and BI readiness.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G5"
+      ],
+      "kpiIds": [
+        "SGTM-06",
+        "GTM-04",
+        "BA-04"
+      ]
+    },
+    {
+      "id": "FG-AN-03",
+      "department": "Analytics",
+      "name": "Improve data capability and KPI measurement readiness",
+      "definition": "Data automation benefits; validated KPI data readiness; data governance/documentation.",
+      "orgGoals": [
+        "G1",
+        "G5",
+        "G6"
+      ],
+      "kpiIds": [
+        "BA-05",
+        "BA-06",
+        "BA-07"
+      ]
+    },
+    {
+      "id": "FG-SAL-01",
+      "department": "Sales",
+      "name": "Acquire customers and convert qualified demand into profitable sales",
+      "definition": "Commissionable profit; customer acquisition; qualified outbound; sales conversion.",
+      "orgGoals": [
+        "G1",
+        "G2"
+      ],
+      "kpiIds": [
+        "SDE-01",
+        "SDE-02",
+        "SDE-03",
+        "SDE-04"
+      ]
+    },
+    {
+      "id": "FG-SAL-02",
+      "department": "Sales",
+      "name": "Retain and expand existing customer value",
+      "definition": "Existing-base revenue retention; expansion; assigned at-risk recovery; quality sales.",
+      "orgGoals": [
+        "G1",
+        "G4"
+      ],
+      "kpiIds": [
+        "SDE-05",
+        "SDE-06",
+        "SDE-07",
+        "SDE-08"
+      ]
+    },
+    {
+      "id": "FG-SAL-03",
+      "department": "Sales",
+      "name": "Maintain reliable sales pipeline and CRM discipline",
+      "definition": "Sales pipeline and CRM compliance.",
+      "orgGoals": [
+        "G1",
+        "G5"
+      ],
+      "kpiIds": [
+        "SDE-09"
+      ]
+    },
+    {
+      "id": "FG-ENG-01",
+      "department": "Engineering",
+      "name": "Deliver accepted engineering, product and customer-project outputs",
+      "definition": "Timely accepted engineering deliverables, product enhancements, customer projects and technical support outputs.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "SSE-01",
+        "SEE-01",
+        "SEE-02",
+        "SEE-06",
+        "SEI-01",
+        "SEI-02"
+      ]
+    },
+    {
+      "id": "FG-ENG-02",
+      "department": "Engineering",
+      "name": "Maintain engineering quality and resolve technical issues",
+      "definition": "First-time-right delivery and priority/SLA-compliant bug and technical issue action.",
+      "orgGoals": [
+        "G3",
+        "G4"
+      ],
+      "kpiIds": [
+        "SSE-02",
+        "SSE-03",
+        "SEE-03",
+        "SEE-04",
+        "SEI-03",
+        "SEI-04"
+      ]
+    },
+    {
+      "id": "FG-ENG-03",
+      "department": "Engineering",
+      "name": "Develop the technical ecosystem and realize improvement benefits",
+      "definition": "Technical roadmap/ecosystem delivery and verified technical improvement benefits.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G3",
+        "G5"
+      ],
+      "kpiIds": [
+        "SSE-05",
+        "SSE-06",
+        "SEE-07",
+        "SEI-06",
+        "SEI-07"
+      ]
+    },
+    {
+      "id": "FG-ENG-04",
+      "department": "Engineering",
+      "name": "Strengthen engineering governance, capability and team performance",
+      "definition": "Work-management controls; technical standards/documentation; team functional performance and demonstrated capability.",
+      "orgGoals": [
+        "G3",
+        "G5",
+        "G6"
+      ],
+      "kpiIds": [
+        "SSE-04",
+        "SSE-07",
+        "SSE-08",
+        "SSE-09",
+        "SEE-05",
+        "SEE-08",
+        "SEI-05",
+        "SEI-08"
+      ]
+    },
+    {
+      "id": "FG-UX-01",
+      "department": "UI/UX",
+      "name": "Deliver usable designs and commercially relevant product experiences",
+      "definition": "Accepted design and product/feature outputs; first-time-right quality.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G3",
+        "G5"
+      ],
+      "kpiIds": [
+        "UX-01",
+        "UX-02",
+        "UX-04"
+      ]
+    },
+    {
+      "id": "FG-UX-02",
+      "department": "UI/UX",
+      "name": "Improve user experience and design consistency",
+      "definition": "UI/UX audits and corrective actions; design system consistency; measurable improvement benefits.",
+      "orgGoals": [
+        "G1",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "UX-03",
+        "UX-05",
+        "UX-06"
+      ]
+    },
+    {
+      "id": "FG-UX-03",
+      "department": "UI/UX",
+      "name": "Maintain usable UI/UX documentation",
+      "definition": "Current, complete UI/UX documentation meeting readiness requirements.",
+      "orgGoals": [
+        "G3",
+        "G5"
+      ],
+      "kpiIds": [
+        "UX-07"
+      ]
+    },
+    {
+      "id": "FG-WEB-01",
+      "department": "Web Development",
+      "name": "Maintain reliable websites and timely issue control",
+      "definition": "Website availability; preventive monitoring; audit/corrective action; priority/SLA-compliant issue resolution.",
+      "orgGoals": [
+        "G1",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "WEB-01",
+        "WEB-02",
+        "WEB-03",
+        "WEB-06"
+      ]
+    },
+    {
+      "id": "FG-WEB-02",
+      "department": "Web Development",
+      "name": "Deliver quality web capabilities and measurable commercial improvements",
+      "definition": "Accepted commercial enablement/web outputs; first-time-right development; verified improvement benefits.",
+      "orgGoals": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "kpiIds": [
+        "WEB-04",
+        "WEB-05",
+        "WEB-07"
+      ]
+    },
+    {
+      "id": "FG-WEB-03",
+      "department": "Web Development",
+      "name": "Maintain web operational and documentation readiness",
+      "definition": "Required web operational controls and usable documentation.",
+      "orgGoals": [
+        "G3",
+        "G5"
+      ],
+      "kpiIds": [
+        "WEB-08"
+      ]
+    }
+  ]
+}
