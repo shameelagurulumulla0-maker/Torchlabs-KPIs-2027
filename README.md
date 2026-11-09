@@ -74,3 +74,8 @@ Each KPI shows a brief description, linked organizational business goals and exp
 Employees can raise an At risk or Unlikely to achieve warning, optional forecast and help request. It routes to the assigned immediate manager, then the functional leader, then General Admin. Managers acknowledge or resolve warnings in-app; open dashboards refresh every 15 seconds. No email notifications are sent.
 
 Contribution graphs aggregate weighted employee achievement with coverage shown explicitly. Sales recognized revenue is entered once per employee and period, separately from company revenue actuals; support achievement is represented as quality contribution. Goal-linked indexes are non-additive and do not replace organizational actuals.
+
+
+## Department privacy and dark mode
+
+The workspace uses a dark black and orange theme by default. Individual Employees receive only their assigned KPI definitions, targets, actuals and evidence. Their department page provides department achievement and same-department teammate achievement summaries, calculated on the server. Teammate summaries never expose KPI details, evidence, revenue records or work from other departments. Cross-functional teammates are scored using only the KPIs assigned to the viewer’s department. Functional Leaders retain their assigned department scope; CEO and General Admin retain organizational access.

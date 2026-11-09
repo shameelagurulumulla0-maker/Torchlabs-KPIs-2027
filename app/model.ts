@@ -19,7 +19,8 @@ export type EvidenceFile={id:string;metricId:string;period:string;name:string;si
 export type RevenueContribution={employeeId:string;period:string;amount:number|null;metricId:string;updatedAt:string};
 export type Action={id:string;metricId:string;period:string;title:string;owner:string;due:string;status:'Open'|'In progress'|'Done';createdAt:string};
 export type Audit={id:string;at:string;actor:string;event:string;detail:string;metricId?:string};
-export type State={metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
+export type AchievementSummary={department:string;period:string;employeeId?:string;name?:string;designation?:string;earnedPct:number|null;coveragePct:number;measuredGapPct:number;pendingPct:number;assessedCount:number;count:number};
+export type State={departmentAchievements?:AchievementSummary[];teamAchievements?:AchievementSummary[];metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
 const rows:[string,string,string,Metric['direction'],string][]=[
  ['G1','Revenue','USD','higher','Recognized revenue for the selected period.'],
  ['G1','Gross margin','%','higher','Gross profit ÷ recognized revenue × 100.'],
