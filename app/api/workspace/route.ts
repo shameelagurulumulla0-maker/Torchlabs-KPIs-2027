@@ -4,7 +4,7 @@ import {dashboardState} from '../../../db/schema';
 import {and,eq} from 'drizzle-orm';
 import {initialState,validEntry,emptyEntry,type State,type Metric,type Entry,type Action,type Member} from '../../model';
 import {upgradeState,departments} from '../../frameworks';
-import {canSetTarget,canEnterActual,canEditMetric,visibleState,roles} from '../../permissions';
+import {canSetTarget,canEnterActual,canOverrideActual,canEditMetric,visibleState,roles} from '../../permissions';
 import {validLevels,flagRecipients,canReviewFlag} from '../../performance';
 import type {LevelConfig,RiskFlag} from '../../model';
 export const dynamic='force-dynamic';
@@ -41,9 +41,15 @@ export async function POST(request:Request){
  if(!m||!validPeriod(body.period)||!e||!validEntry(e,m))return reply({error:'Check the target range, numeric values and evidence URL.'},400);
  const old=state.entries[`${m.id}:${body.period}`]||emptyEntry;
  if(!canSetTarget(member,m)&&(old.target!==e.target||old.upper!==e.upper))return reply({error:'Your role cannot change targets for this KPI.'},403);
- if(!canEnterActual(member,m)&&old.actual!==e.actual)return reply({error:'Your role cannot enter actual results for this KPI.'},403);
+ const supervisorCorrection=canOverrideActual(member,m,state);
+ if(!canEnterActual(member,m)&&!supervisorCorrection&&old.actual!==e.actual)return reply({error:'Your role cannot enter actual results for this KPI.'},403);
  if(!canEnterActual(member,m)&&(old.evidence!==e.evidence||(old.evidenceNotes||'')!==(e.evidenceNotes||'')||JSON.stringify(old.evidenceLinks||[])!==JSON.stringify(e.evidenceLinks||[])))return reply({error:'Only the assigned employee or accountable role can update achievement evidence.'},403);
- if(!canSetTarget(member,m)&&!canEnterActual(member,m))return reply({error:'You do not have permission to update this KPI.'},403);
+ if(supervisorCorrection){
+ if(old.actual===null||e.actual===null)return reply({error:'A supervisor may correct an existing employee actual; it cannot be blank.'},400);
+ if(old.notes!==e.notes)return reply({error:'A supervisor correction cannot change the employee’s review notes.'},403);
+ if(e.actual!==old.actual){if(typeof body.justification!=='string'||!body.justification.trim()||body.justification.length>2000)return reply({error:'A justification is mandatory when a supervisor changes an employee actual.'},400);state.actualAdjustments=[{id:crypto.randomUUID(),metricId:m.id,period:body.period,before:old.actual,after:e.actual,justification:body.justification.trim(),at,actorId:member.id,actor:user.displayName},...(state.actualAdjustments||[])];}
+ }
+ if(!canSetTarget(member,m)&&!canEnterActual(member,m)&&!supervisorCorrection)return reply({error:'You do not have permission to update this KPI.'},403);
  if(body.revenueContribution!==undefined){
  if(m.department!=='Sales'||!m.employeeId||!canEnterActual(member,m))return reply({error:'Only the accountable Sales employee or General Admin can enter sales revenue contribution.'},403);
  const amount=body.revenueContribution;if(amount!==null&&(typeof amount!=='number'||!Number.isFinite(amount)||amount<0))return reply({error:'Sales revenue contribution must be a non-negative USD amount or blank.'},400);
@@ -55,8 +61,9 @@ export async function POST(request:Request){
  if(!old)return reply({error:'Select an existing KPI to edit.'},400);
  if(!canEditMetric(member,old))return reply({error:'Your role cannot configure this KPI.'},403);
  if(typeof incoming.name!=='string'||!incoming.name.trim()||incoming.name.length>150||typeof incoming.unit!=='string'||!incoming.unit||incoming.unit.length>30||!['higher','lower','range'].includes(incoming.direction)||typeof incoming.owner!=='string'||incoming.owner.length>100||typeof incoming.definition!=='string'||incoming.definition.length>4000)return reply({error:'Please complete the KPI definition.'},400);
+ if(incoming.organizationalKpiIds!==undefined&&(!Array.isArray(incoming.organizationalKpiIds)||incoming.organizationalKpiIds.some(id=>typeof id!=='string'||!state.metrics.some(m=>m.id===id&&m.layer==='organizational'&&(old.orgGoals||[old.goal]).includes(m.goal)))))return reply({error:'Select valid organizational KPI links.'},400);
  if(incoming.briefDescription!==undefined&&(typeof incoming.briefDescription!=='string'||incoming.briefDescription.length>180)||incoming.expectedOutcome!==undefined&&(typeof incoming.expectedOutcome!=='string'||incoming.expectedOutcome.length>220))return reply({error:'Keep the description and expected outcome brief.'},400);
- Object.assign(old,{name:incoming.name,unit:incoming.unit,direction:incoming.direction,owner:incoming.owner,definition:incoming.definition,briefDescription:incoming.briefDescription||'',expectedOutcome:incoming.expectedOutcome||''});metricId=old.id;detail=`Updated KPI definition: ${old.name}`;
+ Object.assign(old,{organizationalKpiIds:incoming.organizationalKpiIds===undefined?old.organizationalKpiIds:[...new Set(incoming.organizationalKpiIds)],name:incoming.name,unit:incoming.unit,direction:incoming.direction,owner:incoming.owner,definition:incoming.definition,briefDescription:incoming.briefDescription||'',expectedOutcome:incoming.expectedOutcome||''});metricId=old.id;detail=`Updated KPI definition: ${old.name}`;
  }else if(body.type==='levels'){
  const id=String(body.metricId||''),m=state.metrics.find(m=>m.id===id),employee=id.startsWith('scorecard:')?state.employees?.find(e=>e.id===id.slice(10)):null;
  if(!m&&!employee||!validPeriod(body.period))return reply({error:'Select a valid KPI or employee scorecard and period.'},400);
@@ -102,6 +109,7 @@ export async function POST(request:Request){
  if(body.managerId!==undefined){const manager=state.members?.find(m=>m.id===body.managerId);if(body.managerId&&(!manager||manager.role==='Individual Employee'||manager.role==='Functional Leader'&&!state.metrics.some(m=>m.employeeId===employee.id&&manager.departments.includes(m.department||''))))return reply({error:'Choose an administrator, CEO or a Functional Leader with access to this employee’s functions.'},400);employee.managerId=String(body.managerId);}
  employee.name=body.name.trim();state.metrics.filter(m=>m.employeeId===employee.id).forEach(m=>m.owner=employee.name);for(const flag of state.riskFlags||[])if(flag.employeeId===employee.id&&flag.status!=='Resolved'){const m=state.metrics.find(m=>m.id===flag.metricId);if(m)Object.assign(flag,flagRecipients(state,employee.id,m,flag.raisedById));}detail=`Updated employee profile: ${employee.name}`;
  }else return reply({error:'Unsupported update.'},400);
+ if(body.type==='entry'&&typeof body.justification==='string'&&body.justification.trim())detail+=` · supervisor justification: ${body.justification.trim()}`;
  if(body.type==='entry'&&body.revenueContribution!==undefined)detail+=` · attributed recognized revenue USD ${body.revenueContribution??'not reported'}`;
  state.audit.unshift({id:crypto.randomUUID(),at,actor:user.displayName,event:body.type,detail,metricId});
  const row={content:JSON.stringify(state),revision:revision+1,updatedAt:at};

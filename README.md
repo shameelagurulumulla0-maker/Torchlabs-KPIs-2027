@@ -79,3 +79,10 @@ Contribution graphs aggregate weighted employee achievement with coverage shown 
 ## Department privacy and dark mode
 
 The workspace uses a dark black and orange theme by default. Individual Employees receive only their assigned KPI definitions, targets, actuals and evidence. Their department page provides department achievement and same-department teammate achievement summaries, calculated on the server. Teammate summaries never expose KPI details, evidence, revenue records or work from other departments. Cross-functional teammates are scored using only the KPIs assigned to the viewer’s department. Functional Leaders retain their assigned department scope; CEO and General Admin retain organizational access.
+
+
+## Personalized organizational views and corrections
+
+Employees start on Organizational data, showing only directly linked organizational KPI targets, actuals and gaps, departmental G1–G6 achievement, their own percentage-point contribution and individual actuals. General Admin and CEO assign direct organizational KPI links in Configure. Broad goal mappings do not automatically expose organizational measures. Snapshots exclude company notes and evidence. Leaders see assigned functions; CEO and Admin review all departments.
+
+Only General Admin and CEO change KPI setup and targets. A Functional Leader may correct a submitted employee actual in their assigned department, subject to an immediate-manager assignment when present. Mandatory justification, original/new values, actor and timestamp remain visible to the employee. Supervisors cannot alter targets, employee evidence, review notes or recognized revenue in a correction. CEO can manage actuals at all layers.

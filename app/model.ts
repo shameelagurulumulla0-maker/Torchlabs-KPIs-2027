@@ -10,7 +10,7 @@ export type Layer='organizational'|'departmental'|'supervisory'|'individual';
 export type Role='Individual Employee'|'Functional Leader'|'CEO'|'General Admin';
 export type Member={id:string;email:string;name:string;role:Role;departments:string[];employeeId:string;userId?:string};
 export type Employee={id:string;name:string;designation:string;department:string;supervisory:boolean;managerId?:string};
-export type Metric={id:string;goal:string;name:string;unit:string;direction:'higher'|'lower'|'range';definition:string;owner:string;layer?:Layer;department?:string;employeeId?:string;designation?:string;functionalGoalId?:string;weight?:number;kpiType?:string;orgGoals?:string[];briefDescription?:string;expectedOutcome?:string};
+export type Metric={id:string;goal:string;name:string;unit:string;direction:'higher'|'lower'|'range';definition:string;owner:string;layer?:Layer;department?:string;employeeId?:string;designation?:string;functionalGoalId?:string;weight?:number;kpiType?:string;orgGoals?:string[];organizationalKpiIds?:string[];briefDescription?:string;expectedOutcome?:string};
 export type LevelBand={level:'L1'|'L2'|'L3'|'L4'|'L5';min:number|null;max:number|null};
 export type LevelConfig={basis:'actual'|'achievement';bands:LevelBand[];updatedAt?:string;updatedBy?:string};
 export type RiskFlag={id:string;metricId:string;employeeId:string;period:string;reason:string;helpNeeded:string;forecastActual:number|null;severity:'At risk'|'Unlikely to achieve';status:'Open'|'Acknowledged'|'Resolved';raisedById:string;raisedBy:string;raisedAt:string;updatedAt:string;recipientIds:string[];recipientNames:string[];managerNote:string};
@@ -19,8 +19,10 @@ export type EvidenceFile={id:string;metricId:string;period:string;name:string;si
 export type RevenueContribution={employeeId:string;period:string;amount:number|null;metricId:string;updatedAt:string};
 export type Action={id:string;metricId:string;period:string;title:string;owner:string;due:string;status:'Open'|'In progress'|'Done';createdAt:string};
 export type Audit={id:string;at:string;actor:string;event:string;detail:string;metricId?:string};
-export type AchievementSummary={department:string;period:string;employeeId?:string;name?:string;designation?:string;earnedPct:number|null;coveragePct:number;measuredGapPct:number;pendingPct:number;assessedCount:number;count:number};
-export type State={departmentAchievements?:AchievementSummary[];teamAchievements?:AchievementSummary[];metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
+export type AchievementSummary={department:string;period:string;employeeId?:string;name?:string;designation?:string;earnedPct:number|null;coveragePct:number;measuredGapPct:number;pendingPct:number;assessedCount:number;count:number;possible:number;ownContributionPct?:number|null;ownEarnedSharePct?:number|null};
+export type OrganizationOverview={metrics:Pick<Metric,'id'|'name'|'goal'|'unit'|'direction'>[];entries:Record<string,Pick<Entry,'target'|'upper'|'actual'>>};
+export type ActualAdjustment={id:string;metricId:string;period:string;before:number;after:number;justification:string;at:string;actorId:string;actor:string};
+export type State={actualAdjustments?:ActualAdjustment[];organizationOverview?:OrganizationOverview;departmentGoalAchievements?:(AchievementSummary&{goal:string})[];departmentAchievements?:AchievementSummary[];teamAchievements?:AchievementSummary[];metrics:Metric[];entries:Record<string,Entry>;actions:Action[];audit:Audit[];members?:Member[];employees?:Employee[];schemaVersion?:number;files?:EvidenceFile[];revenueContributions?:Record<string,RevenueContribution>;levelConfigs?:Record<string,LevelConfig>;riskFlags?:RiskFlag[]};
 const rows:[string,string,string,Metric['direction'],string][]=[
  ['G1','Revenue','USD','higher','Recognized revenue for the selected period.'],
  ['G1','Gross margin','%','higher','Gross profit ÷ recognized revenue × 100.'],
