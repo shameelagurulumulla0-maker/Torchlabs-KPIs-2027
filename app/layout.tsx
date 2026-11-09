@@ -5,6 +5,7 @@ import "./workspace.css";
 import "./torchlabs-theme.css";
 import "./contribution.css";
 import "./performance.css";
+import "./review-ui.css";
 
 export const metadata: Metadata = {
   title: "Torchlabs · KPI Evaluator",
