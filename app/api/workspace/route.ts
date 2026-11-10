@@ -8,6 +8,7 @@ import {canSetTarget,canEnterActual,canOverrideActual,canEditMetric,visibleState
 import {validLevels,flagRecipients,canReviewFlag} from '../../performance';
 import type {LevelConfig,RiskFlag} from '../../model';
 import {management,isReviewPeriod,reviewOpen,supervisorCanSign,editableActual,invalidateReview} from '../../reviews';
+import {calculate,calculationFor,validCalculation,validSourcePlan} from '../../calculations';
 export const dynamic='force-dynamic';
 const reply=(data:unknown,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store'}});
 const validPeriod=(p:unknown)=>typeof p==='string'&&/^20\d\d-(MidYear|YearEnd|Annual|Q[1-4]|M(0[1-9]|1[0-2]))$/.test(p);
@@ -78,6 +79,13 @@ export async function POST(request:Request){
  if(!management(member)&&old.notes!==e.notes)return reply({error:'Review notes are reserved for the evaluator.'},403);
  if(!canSetTarget(member,m)&&(old.target!==e.target||old.upper!==e.upper))return reply({error:'Your role cannot change targets for this KPI.'},403);
  const supervisorCorrection=canOverrideActual(member,m,state);
+ const inputsChanged=JSON.stringify(old.measurement)!==JSON.stringify(e.measurement);
+ if(supervisorCorrection&&inputsChanged)return reply({error:'Supervisors correct actuals with justification; the employee’s underlying input data is retained.'},403);
+ let actualBasis=old.actualBasis||'Reported',calculationSnapshot=old.calculationSnapshot;
+ if(e.measurement!==undefined&&!supervisorCorrection&&(inputsChanged||old.actualBasis==='Calculated'||!old.measurement)&&!(management(member)&&e.actual!==old.actual&&!inputsChanged)){const calculation=calculationFor(m),result=calculate(calculation,e.measurement);if(result.error)return reply({error:result.error},400);e.actual=result.value;actualBasis='Calculated';calculationSnapshot=calculation;}
+ else if(!management(member)&&!supervisorCorrection&&e.actual!==old.actual&&calculationFor(m).kind!=='value')return reply({error:'Enter the underlying figures so the system can calculate this KPI.'},400);
+ if(supervisorCorrection&&e.actual!==old.actual)actualBasis='Supervisor correction';else if(management(member)&&e.actual!==old.actual&&!inputsChanged)actualBasis='Management correction';
+
  if(!canEnterActual(member,m)&&!supervisorCorrection&&old.actual!==e.actual)return reply({error:'Your role cannot enter actual results for this KPI.'},403);
  if(!canEnterActual(member,m)&&(old.evidence!==e.evidence||(old.evidenceNotes||'')!==(e.evidenceNotes||'')||JSON.stringify(old.evidenceLinks||[])!==JSON.stringify(e.evidenceLinks||[])))return reply({error:'Only the assigned employee or accountable role can update achievement evidence.'},403);
  if(supervisorCorrection){
@@ -91,16 +99,18 @@ export async function POST(request:Request){
  const amount=body.revenueContribution;if(amount!==null&&(typeof amount!=='number'||!Number.isFinite(amount)||amount<0))return reply({error:'Sales revenue contribution must be a non-negative USD amount or blank.'},400);
  state.revenueContributions={...(state.revenueContributions||{}),[`${m.employeeId}:${body.period}`]:{employeeId:m.employeeId,period:body.period,amount,metricId:m.id,updatedAt:at}};
  }
- state.entries[`${m.id}:${body.period}`]={target:e.target,upper:e.upper,actual:e.actual,notes:e.notes,evidence:e.evidence,evidenceNotes:e.evidenceNotes||'',evidenceLinks:e.evidenceLinks||[],updatedAt:at};invalidateReview(state,m,body.period,user.displayName,'Actual, target or evidence updated; previous sign-offs cleared',supervisorCorrection);metricId=m.id;detail=`${m.name} · ${body.period}: target ${e.target??'blank'}, actual ${e.actual??'blank'}`;
+ state.entries[`${m.id}:${body.period}`]={measurement:e.measurement,calculationSnapshot,actualBasis,target:e.target,upper:e.upper,actual:e.actual,notes:e.notes,evidence:e.evidence,evidenceNotes:e.evidenceNotes||'',evidenceLinks:e.evidenceLinks||[],updatedAt:at};invalidateReview(state,m,body.period,user.displayName,'Actual, target or evidence updated; previous sign-offs cleared',supervisorCorrection);metricId=m.id;detail=`${m.name} · ${body.period}: target ${e.target??'blank'}, actual ${e.actual??'blank'}`;
  }else if(body.type==='metric'){
  const incoming=body.metric as Metric;const old=state.metrics.find(m=>m.id===incoming?.id);
  if(!old)return reply({error:'Select an existing KPI to edit.'},400);
  if(!canEditMetric(member,old))return reply({error:'Your role cannot configure this KPI.'},403);
  if(Object.values(state.reviews||{}).some(r=>r.metricId===old.id&&['Submitted','Supervisor approved'].includes(r.status)&&r.period!==body.period))return reply({error:'Select the submitted review cycle before changing this KPI definition.'},409);
  if(typeof incoming.name!=='string'||!incoming.name.trim()||incoming.name.length>150||typeof incoming.unit!=='string'||!incoming.unit||incoming.unit.length>30||!['higher','lower','range'].includes(incoming.direction)||typeof incoming.owner!=='string'||incoming.owner.length>100||typeof incoming.definition!=='string'||incoming.definition.length>4000)return reply({error:'Please complete the KPI definition.'},400);
+ if(incoming.calculation!==undefined&&!validCalculation(incoming.calculation))return reply({error:'Check the calculation type, input labels and multiplier.'},400);
+ if(incoming.sourcePlan!==undefined&&!validSourcePlan(incoming.sourcePlan))return reply({error:'Check the planned data source and field mappings.'},400);
  if(incoming.organizationalKpiIds!==undefined&&(!Array.isArray(incoming.organizationalKpiIds)||incoming.organizationalKpiIds.some(id=>typeof id!=='string'||!state.metrics.some(m=>m.id===id&&m.layer==='organizational'&&(old.orgGoals||[old.goal]).includes(m.goal)))))return reply({error:'Select valid organizational KPI links.'},400);
  if(incoming.briefDescription!==undefined&&(typeof incoming.briefDescription!=='string'||incoming.briefDescription.length>180)||incoming.expectedOutcome!==undefined&&(typeof incoming.expectedOutcome!=='string'||incoming.expectedOutcome.length>220))return reply({error:'Keep the description and expected outcome brief.'},400);
- Object.assign(old,{organizationalKpiIds:incoming.organizationalKpiIds===undefined?old.organizationalKpiIds:[...new Set(incoming.organizationalKpiIds)],name:incoming.name,unit:incoming.unit,direction:incoming.direction,owner:incoming.owner,definition:incoming.definition,briefDescription:incoming.briefDescription||'',expectedOutcome:incoming.expectedOutcome||''});for(const [key,r] of Object.entries(state.reviews||{}))if(r.metricId===old.id&&r.period===body.period)invalidateReview(state,old,r.period,user.displayName,'KPI definition changed; resubmission required');metricId=old.id;detail=`Updated KPI definition: ${old.name}`;
+ Object.assign(old,{calculation:incoming.calculation===undefined?old.calculation:incoming.calculation,sourcePlan:incoming.sourcePlan===undefined?old.sourcePlan:incoming.sourcePlan,organizationalKpiIds:incoming.organizationalKpiIds===undefined?old.organizationalKpiIds:[...new Set(incoming.organizationalKpiIds)],name:incoming.name,unit:incoming.unit,direction:incoming.direction,owner:incoming.owner,definition:incoming.definition,briefDescription:incoming.briefDescription||'',expectedOutcome:incoming.expectedOutcome||''});for(const [key,r] of Object.entries(state.reviews||{}))if(r.metricId===old.id&&r.period===body.period)invalidateReview(state,old,r.period,user.displayName,'KPI definition changed; resubmission required');metricId=old.id;detail=`Updated KPI definition: ${old.name}`;
  }else if(body.type==='levels'){
  const id=String(body.metricId||''),m=state.metrics.find(m=>m.id===id),employee=id.startsWith('scorecard:')?state.employees?.find(e=>e.id===id.slice(10)):null;
  if(!m&&!employee||!validPeriod(body.period))return reply({error:'Select a valid KPI or employee scorecard and period.'},400);

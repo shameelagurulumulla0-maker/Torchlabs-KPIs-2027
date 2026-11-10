@@ -108,3 +108,12 @@ Admin and CEO can filter departments and people and export overall data. Functio
 Run `pnpm test:workflow` for the role, window, sign-off, annual score, correction, onboarding, alert/help and export authorization checks.
 
 A later review-cycle definition update preserves an earlier final-approved snapshot. Changes to a submitted cycle clear approvals only for that selected cycle; management must select a pending cycle before editing its submitted definition.
+
+
+## Unified input and calculation workspace
+
+My KPIs & Performance contains one entry area for all assigned KPIs: underlying figures, evidence, calculated actuals, achievement, levels and submission. Exact framework ratio and budget-variance formulas are recognized without changing KPI names, weights or targets. The server recalculates submitted figures and retains the raw inputs and calculation rule with the result and signed review snapshot. Missing totals stay pending; a zero denominator is rejected. Supervisor corrections retain raw employee inputs and require justification.
+
+Admin and CEO may configure supported calculation rules and plan Jira, ClickUp, internal-dashboard, database or custom-API fields per KPI. Planning fields do not connect or fetch anything. All external providers remain Not connected; no external integration is activated in this update.
+
+The opening access screen has Employee, Supervisor and Admin categories, selected by the authenticated account assignment. CEO maps to Admin by default. Category selection cannot grant or elevate privileges.
